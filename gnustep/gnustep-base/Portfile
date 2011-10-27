@@ -77,9 +77,7 @@ if { ![variant_isset ffcall] } {
 variant ffi description conflicts ffcall description {Build with ffi} {
     depends_lib-append port:libffi
     configure.args-append \
-        --enable-libffi \
-        --with-ffi-include=${prefix}/include/gcc42 \
-        --with-ffi-library=${prefix}/lib/gcc42
+        --enable-libffi
 }
 
 variant ffcall conflicts ffi description {Build with ffcall} {
@@ -91,12 +89,6 @@ variant ffcall conflicts ffi description {Build with ffcall} {
 platform darwin {
     patchfiles-append       patch-SSL-GNUMakefile.diff
 
-    post-destroot {
-        set system_dir ${destroot}${prefix}/GNUstep/Local
-        move ${system_dir}/Tools/defaults ${system_dir}/Tools/gdefaults
-        move ${system_dir}/Library/Documentation/man/man1/defaults.1.gz \
-            ${system_dir}/Library/Documentation/man/man1/gdefaults.1.gz
-    }
     post-install { 
         ui_msg "
             **** GNUstep 'defaults' tool is renamed 'gdefaults' to avoid\

@@ -27,16 +27,7 @@ checksums           rmd160  a72970e1bf0fa93622981e991717714795cdb7a5 \
 
 destroot.violate_mtree yes
 
-platform darwin 8 {
-    depends_lib         port:apple-gcc42
-    configure.compiler  apple-gcc-4.2
-}
-platform darwin 9 {
-    configure.compiler  gcc-4.2
-}
-
-configure.args      CC=${configure.cc} \
-                    --with-library-combo=gnu-gnu-gnu \
+configure.args      --with-library-combo=gnu-gnu-gnu \
                     --with-objc-lib-flag=-lobjc-gnu
 
 destroot.args       messages=yes
@@ -49,16 +40,10 @@ if {![variant_isset fhs_layout]} {
 variant fhs_layout conflicts gnustep_layout description {Use FHS layout (unsupported)} {
     configure.args-append   --with-layout=fhs \
                             --with-config-file=${prefix}/etc/GNUstep.conf
-    post-patch {
-        reinplace "s|=/man|=/share/man|g" \
-            ${worksrcpath}/FilesystemLayouts/fhs
-        reinplace "s|=/info|=/share/info|g" \
-            ${worksrcpath}/FilesystemLayouts/fhs
-    }
 }
 
 variant gnustep_layout conflicts fhs_layout description {Use standard GNUstep layout} {
-    configure.pre_args      --prefix=${prefix}/GNUstep
+    configure.pre_args      —with-layout=gnustep
     configure.args-append   \
         --with-config-file=${prefix}/GNUstep/System/Library/GNUstep.conf
 
@@ -74,12 +59,4 @@ You may also want to set up your MANPATH :
 export MANPATH=\$GNUSTEP_LOCAL_ROOT/Library/Documentation/man:\$GNUSTEP_SYSTEM_ROOT/Library/Documentation/man:${prefix}/share/man:/usr/share/man
 ##########################################################
 "
-}
-
-platform darwin {
-    post-patch {
-        reinplace "s|/home|/Users|g" \
-            ${worksrcpath}/FilesystemLayouts/gnustep \
-            ${worksrcpath}/FilesystemLayouts/fhs
-    }
 }

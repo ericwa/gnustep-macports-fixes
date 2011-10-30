@@ -1,0 +1,148 @@
+Index: configure.ac
+===================================================================
+--- configure.ac	(revision 34092)
++++ configure.ac	(working copy)
+@@ -1212,16 +1212,8 @@
+ fi
+ 
+ #--------------------------------------------------------------------
+-# Check if Objective-C is installed
++# Check for GC
+ #--------------------------------------------------------------------
+-AC_CHECK_HEADERS(objc/runtime.h)
+-AC_CHECK_HEADERS(objc/objc.h)
+-if test $ac_cv_header_objc_objc_h = no; then
+-  echo "Check to make sure you have a full installation of the GCC"
+-  echo "compiler that includes the Objective-C headers and libraries"
+-  AC_MSG_ERROR(Could not find Objective-C headers)
+-fi
+-
+ if test $OBJC_WITH_GC = yes; then
+   AC_CHECK_HEADERS(gc/gc.h, gc_ok=yes, gc_ok=no)
+   if test "$gc_ok" = no; then
+@@ -1709,11 +1701,18 @@
+ #--------------------------------------------------------------------
+ # Check for thread synchronisation support in runtime
+ #--------------------------------------------------------------------
+-AC_CHECK_FUNCS(objc_sync_enter)
+-if test $ac_cv_func_objc_sync_enter = yes ; then
++AC_MSG_CHECKING(for objc_sync_enter)
++AC_CACHE_VAL(gs_cv_objc_sync,
++  AC_RUN_IFELSE([#include "$srcdir/config/config.objcsync.m"],
++	gs_cv_objc_sync=yes,
++	gs_cv_objc_sync=no)
++)
++if test $gs_cv_objc_sync = yes ; then
+   OBJCSYNC=1
++  AC_MSG_RESULT(yes)
+ else
+   OBJCSYNC=0
++  AC_MSG_RESULT(no)
+ fi
+ AC_SUBST(OBJCSYNC)
+ 
+@@ -1722,22 +1721,36 @@
+ #--------------------------------------------------------------------
+ # Check for ObjC2 support in runtime
+ #--------------------------------------------------------------------
+-AC_CHECK_FUNCS(objc_setProperty)
+-if test $ac_cv_func_objc_setProperty = yes ; then
++AC_MSG_CHECKING(for objc_setProperty)
++AC_CACHE_VAL(gs_cv_objc_setProperty,
++  AC_RUN_IFELSE([#include "$srcdir/config/config.objcsetproperty.m"],
++	gs_cv_objc_setProperty=yes,
++	gs_cv_objc_setProperty=no)
++)
++if test $gs_cv_objc_setProperty = yes ; then
+   OBJC2RUNTIME=1
++  AC_MSG_RESULT(yes)
+ else
+   OBJC2RUNTIME=0
++  AC_MSG_RESULT(no)
+ fi
+ AC_SUBST(OBJC2RUNTIME)
+ 
+ #--------------------------------------------------------------------
+ # Check for blocks support in runtime
+ #--------------------------------------------------------------------
+-AC_CHECK_FUNCS(_Block_copy)
+-if test $ac_cv_func__Block_copy = yes ; then
++AC_MSG_CHECKING(for _Block_copy)
++AC_CACHE_VAL(gs_cv_objc_block_copy,
++  AC_RUN_IFELSE([#include "$srcdir/config/config.objcblockcopy.m"],
++	gs_cv_objc_block_copy=yes,
++	gs_cv_objc_block_copy=no)
++)
++if test $gs_cv_objc_block_copy = yes ; then
+   HAVE_BLOCKS=1
++  AC_MSG_RESULT(yes)
+ else
+   HAVE_BLOCKS=0
++  AC_MSG_RESULT(no)
+ fi
+ AC_SUBST(HAVE_BLOCKS)
+ 
+@@ -1877,11 +1890,15 @@
+ #--------------------------------------------------------------------
+ # Function needed by @synchronize directive
+ #--------------------------------------------------------------------
+-AC_CHECK_FUNCS(objc_sync_enter)
+ 
++AC_MSG_CHECKING(for objc_sync_enter)
++# FIXME: This is tested earlier and stored in OBJCSYNC!
+ HAVE_OBJC_SYNC_ENTER=no
+-if test $ac_cv_func_objc_sync_enter = yes ; then
++if test $OBJCSYNC = yes ; then
+   HAVE_OBJC_SYNC_ENTER=yes
++  AC_MSG_RESULT(yes)
++else
++  AC_MSG_RESULT(no)
+ fi
+ AC_SUBST(HAVE_OBJC_SYNC_ENTER)
+ 
+Index: config/config.objcblockcopy.m
+===================================================================
+--- config/config.objcblockcopy.m	(revision 0)
++++ config/config.objcblockcopy.m	(revision 0)
+@@ -0,0 +1,10 @@
++#include "objc-common.g"
++
++// This is not in the public libobjc headers, so we declare it ourselves
++void *_Block_copy(void *src);
++
++int main (void)
++{
++	_Block_copy(NULL);
++	return 0;
++}
+Index: config/config.objcsync.m
+===================================================================
+--- config/config.objcsync.m	(revision 0)
++++ config/config.objcsync.m	(revision 0)
+@@ -0,0 +1,11 @@
++#include "objc-common.g"
++
++// This may not be in the public headers so declare it here
++int objc_sync_enter (id object);
++
++int main (void)
++{
++	NSObject *testObject = [NSObject new];
++	objc_sync_enter(testObject);
++	return 0;
++}
+Index: config/config.objcsetproperty.m
+===================================================================
+--- config/config.objcsetproperty.m	(revision 0)
++++ config/config.objcsetproperty.m	(revision 0)
+@@ -0,0 +1,10 @@
++#include "objc-common.g"
++
++// This is not in the public libobjc headers, so we declare it ourselves
++void objc_setProperty(id obj, SEL cmd, ptrdiff_t offset, id arg, BOOL isAtomic, BOOL isCopy);
++
++int main (void)
++{
++	objc_setProperty(NULL, NULL, 0, NULL, NO, NO);
++	return 0;
++}

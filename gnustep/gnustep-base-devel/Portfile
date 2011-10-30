@@ -38,6 +38,10 @@ use_configure       yes
 configure.compiler  macports-gcc-4.4
 configure.args-append   --disable-tls
 
+# use_autoreconf to regenerate configure because the patch updates configure.ac
+patchfiles-append  patch-configure.diff
+use_autoreconf     yes
+
 startupitem.create  yes
 startupitem.name    gdomap
 set my_pid          ${prefix}/var/run/gdomap.pid

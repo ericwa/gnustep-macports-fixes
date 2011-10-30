@@ -1,3 +1,4 @@
 *.swp
 PortIndex
 PortIndex.quick
+*.Portfile.swo

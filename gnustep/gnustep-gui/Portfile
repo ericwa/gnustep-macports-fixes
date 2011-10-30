@@ -25,24 +25,20 @@ checksums           md5     03c7ccae799acd104c7515c44831626b \
                     rmd160  94eef129b73bcfc08fdf85a82c1f973ddc05235e
 
 depends_lib     port:aspell \
-                port:audiofile \
                 port:gnustep-base \
                 port:gnutls \
                 port:libpng \
                 path:include/gif_lib.h:giflib \
+                port:jpeg \
                 port:tiff
+
+universal_variant   no
+
+configure.compiler  macports-gcc-4.4
 
 use_configure   yes
 
-post-destroot {
-    xinstall -d ${destroot}${system_library}/Images
-    system "cp -f ${filespath}/common_*.tiff \
-        ${destroot}${system_library}/Images"
-}
-
 platform darwin {
-    # no audio support
-    depends_lib-delete      port:audiofile
-    configure.args-append   --disable-gsnd \
-                            --disable-cups
+    configure.args-append   --disable-cups \
+                            --disable-sound
 }

@@ -1,0 +1,45 @@
+PortSystem 1.0
+PortGroup   gnustep 1.0
+
+name                libobjc2
+version             4.6.0
+revision            1
+platforms           darwin
+license             MIT
+maintainers         nomaintainer
+
+fetch.type          svn
+svn.url             svn://svn.gna.org/svn/gnustep/libs/libobjc2/trunk
+worksrcdir          trunk
+
+description         The GNUstep Objective-C runtime
+long_description \
+    The GNUstep Objective-C runtime is designed as a drop-in replacement for the \
+    GCC runtime.  It supports both a legacy and a modern ABI, allowing code \
+    compiled with old versions of GCC to be supported without requiring \
+    recompilation.  The modern ABI adds the following features: \
+    \
+    - Non-fragile instance variables. \
+    - Protocol uniquing. \
+    - Object planes support. \
+    - Declared property introspection. \
+    \
+    Both ABIs support the following feature above and beyond the GCC runtime: \
+    \
+    - The modern Objective-C runtime APIs, introduced with OS X 10.5. \
+    - Blocks (closures). \
+    - Low memory profile for platforms where memory usage is more important than \
+      speed. \
+    - Synthesised property accessors. \
+    - Efficient support for @synchronized() \
+    - Type-dependent dispatch, eliminating stack corruption from mismatched \
+      selectors. \
+    - Support for the associated reference APIs introduced with Mac OS X 10.6. \
+    - Support for the automatic reference counting APIs introduced with Mac OS X \
+      10.7
+
+universal_variant   no
+use_configure       no
+
+configure.compiler  macports-gcc-4.4
+depends_build-append port:gcc44

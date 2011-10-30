@@ -1,0 +1,61 @@
+# $Id: Portfile 84710 2011-09-30 09:02:16Z jmr@macports.org $
+
+PortSystem 1.0
+PortGroup   gnustep 1.0
+
+name                gnustep-base-devel
+version             r${svn.revision}
+revision            1
+platforms           darwin
+# libs are LGPL, tools are GPL
+license             {LGPL-3+ GPL-3+}
+maintainers         nomaintainer
+
+fetch.type          svn
+svn.url             svn://svn.gna.org/svn/gnustep/libs/base/trunk
+worksrcdir          trunk
+
+description         A library of general-purpose Objective C objects.
+long_description \
+    The GNUstep Base Library is a library of general-purpose, non-graphical \
+    Objective C objects.  For example, it includes classes for strings, \
+    object collections, byte streams, typed coders, invocations, \
+    notifications, notification dispatchers, moments in time, network ports, \
+    remote object messaging support (distributed objects), and event loops. \
+    \
+    It provides functionality that aims to implement the non-graphical \
+    portion of the OpenStep standard (the Foundation library).
+
+depends_lib         port:gnustep-make \
+                    port:libxslt \
+                    port:openssl \
+                    port:libffi
+
+universal_variant   no
+build.args          messages=yes
+use_configure       yes
+
+configure.compiler  macports-gcc-4.4
+configure.args-append   --disable-tls
+
+startupitem.create  yes
+startupitem.name    gdomap
+set my_pid          ${prefix}/var/run/gdomap.pid
+startupitem.start   \
+    "GNUSTEP_SYSTEM_ROOT=${prefix}/GNUstep/System" \
+    "\[ -f \$GNUSTEP_SYSTEM_ROOT/Tools/gdomap \] && \\" \
+    "rm -f ${my_pid} && \\" \
+    "\$GNUSTEP_SYSTEM_ROOT/Tools/gdomap -p -I ${my_pid}"
+startupitem.stop    \
+    "\[ -r ${prefix}/var/run/gdomap.pid \] && \\" \
+    "kill -9 `cat ${my_pid}` && \\" \
+    "rm -f ${my_pid}"
+
+platform darwin {
+    post-install { 
+        ui_msg "
+            **** GNUstep 'defaults' tool is renamed 'gdefaults' to avoid\
+            overriding Apple's defaults tool. *****
+        "
+    }
+}

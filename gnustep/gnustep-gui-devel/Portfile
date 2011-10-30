@@ -1,0 +1,44 @@
+# $Id: Portfile 84711 2011-09-30 09:02:49Z jmr@macports.org $
+
+PortSystem      1.0
+PortGroup       gnustep 1.0
+
+name            gnustep-gui-devel
+version         r${svn.revision}
+revision        1
+platforms       darwin
+# libs are LGPL, tools are GPL
+license         {LGPL GPL-3+}
+maintainers     nomaintainer
+
+fetch.type      svn
+svn.url         svn://svn.gna.org/svn/gnustep/libs/gui/trunk
+worksrcdir      trunk
+
+description     A library of graphical user interface Objective C classes
+long_description \
+    The GNUstep gui library is a library of graphical user interface classes \
+    written completely in the Objective-C language. The classes are based \
+    upon the OpenStep specification as release by NeXT Software, Inc.  These \
+    classes include graphical objects such as buttons, text fields, popup \
+    lists, browser lists, and windows. There are also many associated \
+    classes for handling events, colors, fonts, pasteboards and images.
+
+depends_lib     port:aspell \
+                port:gnustep-base-devel \
+                port:gnutls \
+                port:libpng \
+                path:include/gif_lib.h:giflib \
+                port:jpeg \
+                port:tiff
+
+universal_variant   no
+
+configure.compiler  macports-gcc-4.4
+
+use_configure   yes
+
+platform darwin {
+    configure.args-append   --disable-cups \
+                            --disable-sound
+}

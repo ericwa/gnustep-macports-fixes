@@ -10,6 +10,7 @@ platforms       darwin
 # libs are LGPL, tools are GPL
 license         {LGPL GPL-3+}
 maintainers     nomaintainer
+master_sites    gnustep:core
 
 description     A library of graphical user interface Objective C classes
 long_description \

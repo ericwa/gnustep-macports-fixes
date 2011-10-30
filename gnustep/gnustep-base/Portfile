@@ -28,33 +28,15 @@ checksums           md5     100e433a7e0624a6e4e5727b87e48c82 \
 
 depends_lib         port:gnustep-make \
                     port:libxslt \
-                    port:openssl
+                    port:openssl \
+                    port:libffi
 
 universal_variant   no
-
+build.args          messages=yes
 use_configure       yes
-configure.env-append    LIBOBJC=-lobjc-gnu
+
+configure.compiler  macports-gcc-4.4
 configure.args-append   --disable-tls
-
-destroot.keepdirs   ${destroot}${prefix}/var/run
-
-pre-extract {
-    if { [variant_isset with_docs] &&
-            [catch {set ilist [registry_installed ${name}]} result ]            
-    } then {
-        return -code error "
-        
-            gnustep-base documentation depends on gnustep-base ...
-            You must install gnustep-base before trying to install\
-            gnustep-base +with_docs
-        "
-    }
-}
-
-post-patch {
-    reinplace "s|CODING-STANDARDS|GS-CODING-STANDARDS|g" \
-        ${worksrcpath}/Documentation/GNUmakefile
-}
 
 startupitem.create  yes
 startupitem.name    gdomap
@@ -68,23 +50,6 @@ startupitem.stop    \
     "\[ -r ${prefix}/var/run/gdomap.pid \] && \\" \
     "kill -9 `cat ${my_pid}` && \\" \
     "rm -f ${my_pid}"
-
-
-if { ![variant_isset ffcall] } {
-    default_variants +ffi
-}
-
-variant ffi description conflicts ffcall description {Build with ffi} {
-    depends_lib-append port:libffi
-    configure.args-append \
-        --enable-libffi
-}
-
-variant ffcall conflicts ffi description {Build with ffcall} {
-    depends_lib-append port:ffcall
-    configure.args-append \
-        --enable-ffcall
-}
 
 platform darwin {
     patchfiles-append       patch-SSL-GNUMakefile.diff

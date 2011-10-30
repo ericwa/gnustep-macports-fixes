@@ -94,33 +94,8 @@
 
 
 #
-# Returns true (1) if current file layout is gnustep
-# Returns false (0) otherwise
-#
-
-proc gnustep_layout {} {
-    global prefix
-    
-    if {[file exists ${prefix}/GNUstep/System/Library/Makefiles]} {
-        return 1
-    }
-    return 0
-}
-
-proc gnustep_makefile {} {
-    global prefix
-    
-    if {[gnustep_layout]} {
-        return "${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh"
-    }
-    return "${prefix}/share/GNUstep/Makefiles/GNUstep.sh"
-}
-
-#
 # Options this group provides :
 #
-
-configure.compiler          macports-gcc-4.4
 
 #
 # Default values for this group :
@@ -129,12 +104,3 @@ configure.compiler          macports-gcc-4.4
 default categories          gnustep
 default homepage            http://www.gnustep.org/
 
-default master_sites        gnustep:core
-default depends_lib         port:gnustep-core
-
-default use_configure       no
-
-pre-destroot {
-    echo hai
-    source [gnustep_makefile]
-}

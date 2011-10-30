@@ -25,38 +25,21 @@ master_sites        gnustep:core
 checksums           rmd160  a72970e1bf0fa93622981e991717714795cdb7a5 \
                     sha256  c48b0a4c85eee4799b12cceeb327c470b168100cbcda4f111b1edad71f8762eb
 
-destroot.violate_mtree yes
-
+configure.compiler  macports-gcc-4.4
 configure.args      --with-library-combo=gnu-gnu-gnu \
-                    --with-objc-lib-flag=-lobjc-gnu
+                    --with-objc-lib-flag=-lobjc-gnu \
+                    --with-layout=fhs \
+                    --with-config-file=${prefix}/etc/GNUstep/GNUstep.conf
 
 destroot.args       messages=yes
 
-if {![variant_isset fhs_layout]} {
-    default_variants    +gnustep_layout
-}
-
-# for the curious only, not really supported by MacPorts
-variant fhs_layout conflicts gnustep_layout description {Use FHS layout (unsupported)} {
-    configure.args-append   --with-layout=fhs \
-                            --with-config-file=${prefix}/etc/GNUstep.conf
-}
-
-variant gnustep_layout conflicts fhs_layout description {Use standard GNUstep layout} {
-    configure.pre_args      —with-layout=gnustep
-    configure.args-append   \
-        --with-config-file=${prefix}/GNUstep/System/Library/GNUstep.conf
-
-    destroot.keepdirs       ${destroot}${prefix}/GNUstep/Local
-
-        notes "\
+notes               "\
 ##########################################################
 To have a fully working GNUstep make system, please add
-'. ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh'
+'. ${prefix}/share/GNUstep/Makefiles/GNUstep.sh'
 to your shell login (in ~/.profile)
 
 You may also want to set up your MANPATH :
 export MANPATH=\$GNUSTEP_LOCAL_ROOT/Library/Documentation/man:\$GNUSTEP_SYSTEM_ROOT/Library/Documentation/man:${prefix}/share/man:/usr/share/man
 ##########################################################
 "
-}

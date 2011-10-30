@@ -36,8 +36,8 @@ universal_variant   no
 build.args          messages=yes
 use_configure       yes
 
-configure.compiler  macports-gcc-4.6
-depends_build-append port:gcc46
+configure.compiler  macports-gcc-4.4
+depends_build-append port:gcc44
 
 configure.args-append   --disable-tls
 

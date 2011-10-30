@@ -31,8 +31,8 @@ checksums           md5     314c753ae922082345cf3a288440fa5a \
 
 use_configure   yes
 
-configure.compiler  macports-gcc-4.6
-depends_build-append port:gcc46
+configure.compiler  macports-gcc-4.4
+depends_build-append port:gcc44
 
 configure.args  --enable-graphics=art \
                 --disable-glx

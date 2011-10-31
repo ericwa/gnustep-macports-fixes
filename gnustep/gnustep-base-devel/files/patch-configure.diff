@@ -41,7 +41,7 @@ Index: configure.ac
  fi
  AC_SUBST(OBJCSYNC)
  
-@@ -1722,22 +1721,36 @@
+@@ -1722,11 +1721,18 @@
  #--------------------------------------------------------------------
  # Check for ObjC2 support in runtime
  #--------------------------------------------------------------------
@@ -61,26 +61,6 @@ Index: configure.ac
 +  AC_MSG_RESULT(no)
  fi
  AC_SUBST(OBJC2RUNTIME)
- 
- #--------------------------------------------------------------------
- # Check for blocks support in runtime
- #--------------------------------------------------------------------
--AC_CHECK_FUNCS(_Block_copy)
--if test $ac_cv_func__Block_copy = yes ; then
-+AC_MSG_CHECKING(for _Block_copy)
-+AC_CACHE_VAL(gs_cv_objc_block_copy,
-+  AC_RUN_IFELSE([#include "$srcdir/config/config.objcblockcopy.m"],
-+	gs_cv_objc_block_copy=yes,
-+	gs_cv_objc_block_copy=no)
-+)
-+if test $gs_cv_objc_block_copy = yes ; then
-   HAVE_BLOCKS=1
-+  AC_MSG_RESULT(yes)
- else
-   HAVE_BLOCKS=0
-+  AC_MSG_RESULT(no)
- fi
- AC_SUBST(HAVE_BLOCKS)
  
 @@ -1877,11 +1890,15 @@
  #--------------------------------------------------------------------

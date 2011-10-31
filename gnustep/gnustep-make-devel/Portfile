@@ -12,7 +12,7 @@ supported_archs noarch
 installs_libs   no
 
 fetch.type          svn
-svn.url             svn://svn.gna.org/svn/gnustep/libs/make/trunk
+svn.url             svn://svn.gna.org/svn/gnustep/tools/make/trunk
 worksrcdir          trunk
 
 homepage        http://www.gnustep.org/

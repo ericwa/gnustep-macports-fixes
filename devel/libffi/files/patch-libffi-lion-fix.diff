@@ -1,0 +1,23 @@
+--- configure	2011-08-23 08:28:30.000000000 -0600
++++ configure-1	2011-10-30 23:58:14.000000000 -0600
+@@ -14292,7 +14292,7 @@
+ $as_echo "#define FFI_EXEC_TRAMPOLINE_TABLE 1" >>confdefs.h
+ 
+      ;;
+-     *-apple-darwin10* | *-*-freebsd* | *-*-openbsd* | *-pc-solaris*)
++     *-apple-darwin1* | *-*-freebsd* | *-*-openbsd* | *-pc-solaris*)
+ 
+ $as_echo "#define FFI_MMAP_EXEC_WRIT 1" >>confdefs.h
+ 
+new-host:libffi-3.0.10 ericw$ diff -u configure.ac configure-1.ac 
+--- configure.ac	2011-08-23 08:28:08.000000000 -0600
++++ configure-1.ac	2011-10-30 23:58:23.000000000 -0600
+@@ -345,7 +345,7 @@
+                  [Cannot use PROT_EXEC on this target, so, we revert to
+                    alternative means])
+      ;;
+-     *-apple-darwin10* | *-*-freebsd* | *-*-openbsd* | *-pc-solaris*)
++     *-apple-darwin1* | *-*-freebsd* | *-*-openbsd* | *-pc-solaris*)
+        AC_DEFINE(FFI_MMAP_EXEC_WRIT, 1,
+                  [Cannot use malloc on this target, so, we revert to
+                    alternative means])

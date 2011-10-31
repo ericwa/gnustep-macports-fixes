@@ -29,7 +29,8 @@ long_description \
 depends_lib         port:gnustep-make \
                     port:libxslt \
                     port:openssl \
-                    port:libffi
+                    port:libffi \
+                    port:icu
 
 universal_variant   no
 build.args          messages=yes

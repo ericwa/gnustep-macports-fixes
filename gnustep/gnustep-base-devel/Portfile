@@ -40,7 +40,8 @@ depends_build-append port:gcc44
 configure.args-append   --disable-tls
 
 # use_autoreconf to regenerate configure because the patch updates configure.ac
-patchfiles-append  patch-configure.diff
+patchfiles-append  patch-configure.diff \
+                   patch-configure-blocks.diff
 use_autoreconf     yes
 
 startupitem.create  yes

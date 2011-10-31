@@ -1,0 +1,29 @@
+Index: configure.ac
+===================================================================
+--- configure.ac	(revision 33715)
++++ configure.ac	(working copy)
+@@ -1714,12 +1714,18 @@
+ #--------------------------------------------------------------------
+ # Check for blocks support in runtime
+ #--------------------------------------------------------------------
+-AC_CHECK_FUNCS(_Block_copy)
+-if test $ac_cv_func__Block_copy = yes ; then
+-  HAVE_BLOCKS=1
+-else
+-  HAVE_BLOCKS=0
+-fi
++
++# AC_CHECK_FUNCS will pass becasue _Block_copy is picked up by libc
++# on OS X, and also because -undefined dynamic_lookup will make
++# AC_CHECK_FUNCS spuriously pass. So we force this test to fail.
++# libobjc2 hasn't yet been ported to OS X anyway.
++
++#AC_CHECK_FUNCS(_Block_copy)
++#if test $ac_cv_func__Block_copy = yes ; then
++#  HAVE_BLOCKS=1
++#else
++HAVE_BLOCKS=0
++#fi
+ AC_SUBST(HAVE_BLOCKS)
+ 
+ # Don't revert any Objective-C flags as they are used in the next test

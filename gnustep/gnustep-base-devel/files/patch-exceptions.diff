@@ -2,7 +2,15 @@ Index: configure.ac
 ===================================================================
 --- configure.ac	(revision 33715)
 +++ configure.ac	(working copy)
-@@ -1797,7 +1797,7 @@
+@@ -1592,6 +1592,7 @@
+ saved_LIBS="$LIBS"
+ saved_CPPFLAGS="$CPPFLAGS"
+ LIBS="$LIBS $LIBOBJC"
++OBJCFLAGS=`gnustep-config --objc-flags`
+ CPPFLAGS="$CPPFLAGS $OBJCFLAGS -x objective-c"
+ if test x"$objc_threaded" != x""; then
+   LIBS="$LIBS $objc_threaded"
+@@ -1797,7 +1798,7 @@
  # the other hand, that case is going to become more and more unusual.
  
  AC_MSG_CHECKING(for objc_setUncaughtExceptionHandler() in runtime)
@@ -11,7 +19,7 @@ Index: configure.ac
  	have_set_uncaught_exception_handler=yes, have_set_uncaught_exception_handler=no)
  if test $have_set_uncaught_exception_handler = yes; then
    AC_DEFINE(HAVE_SET_UNCAUGHT_EXCEPTION_HANDLER,1,
-@@ -1808,7 +1808,7 @@
+@@ -1808,7 +1809,7 @@
  # Don't revert any Objective-C flags as they are used in the next test
  
  AC_MSG_CHECKING(for objc_set_unexpected() in runtime)
@@ -20,7 +28,7 @@ Index: configure.ac
  	have_set_unexpected=yes, have_set_unexpected=no)
  if test $have_set_unexpected = yes; then
    AC_DEFINE(HAVE_SET_UNEXPECTED,1,
-@@ -1827,9 +1827,17 @@
+@@ -1827,9 +1828,17 @@
  fi
  AC_MSG_RESULT($have_unexpected)
  

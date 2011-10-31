@@ -26,7 +26,7 @@ long_description \
     It provides functionality that aims to implement the non-graphical \
     portion of the OpenStep standard (the Foundation library).
 
-depends_lib         port:gnustep-make \
+depends_lib         port:gnustep-make-devel \
                     port:libxslt \
                     port:openssl \
                     port:libffi

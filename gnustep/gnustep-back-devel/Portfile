@@ -24,15 +24,14 @@ long_description \
     such as specific calls to the X Window System.
 
 depends_lib     port:gnustep-gui-devel \
-                port:Xft2 \
-                port:libart_lgpl \
-                port:xorg-libXt
+                port:cairo \
+                port:xorg-libXt \
+                port:xorg-libXext
 
 use_configure   yes
 
-configure.compiler  macports-gcc-4.4
-depends_build-append port:gcc44
+configure.compiler  macports-gcc-4.6
+depends_build-append port:gcc46
 
 
-configure.args  --enable-graphics=art \
-                --disable-glx
+configure.args  --disable-glx

@@ -80,21 +80,6 @@ Index: configure.ac
  fi
  AC_SUBST(HAVE_OBJC_SYNC_ENTER)
  
-Index: config/config.objcblockcopy.m
-===================================================================
---- config/config.objcblockcopy.m	(revision 0)
-+++ config/config.objcblockcopy.m	(revision 0)
-@@ -0,0 +1,10 @@
-+#include "objc-common.g"
-+
-+// This is not in the public libobjc headers, so we declare it ourselves
-+void *_Block_copy(void *src);
-+
-+int main (void)
-+{
-+	_Block_copy(NULL);
-+	return 0;
-+}
 Index: config/config.objcsync.m
 ===================================================================
 --- config/config.objcsync.m	(revision 0)

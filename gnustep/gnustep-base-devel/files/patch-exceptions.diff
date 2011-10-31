@@ -1,0 +1,117 @@
+Index: configure.ac
+===================================================================
+--- configure.ac	(revision 33715)
++++ configure.ac	(working copy)
+@@ -1797,7 +1797,7 @@
+ # the other hand, that case is going to become more and more unusual.
+ 
+ AC_MSG_CHECKING(for objc_setUncaughtExceptionHandler() in runtime)
+-AC_LINK_IFELSE([#include "$srcdir/config/config.setUncaughtExceptionHandler.m"],
++AC_RUN_IFELSE([#include "$srcdir/config/config.setUncaughtExceptionHandler.m"],
+ 	have_set_uncaught_exception_handler=yes, have_set_uncaught_exception_handler=no)
+ if test $have_set_uncaught_exception_handler = yes; then
+   AC_DEFINE(HAVE_SET_UNCAUGHT_EXCEPTION_HANDLER,1,
+@@ -1808,7 +1808,7 @@
+ # Don't revert any Objective-C flags as they are used in the next test
+ 
+ AC_MSG_CHECKING(for objc_set_unexpected() in runtime)
+-AC_LINK_IFELSE([#include "$srcdir/config/config.set_unexpected.m"],
++AC_RUN_IFELSE([#include "$srcdir/config/config.set_unexpected.m"],
+ 	have_set_unexpected=yes, have_set_unexpected=no)
+ if test $have_set_unexpected = yes; then
+   AC_DEFINE(HAVE_SET_UNEXPECTED,1,
+@@ -1827,9 +1827,17 @@
+ fi
+ AC_MSG_RESULT($have_unexpected)
+ 
+-# TODO: It would also be nice to actually test that native Objective-C
+-# exceptions work.
++# Actually test that native Objective-C exceptions work.
+ 
++AC_MSG_CHECKING(whether native exceptions really work)
++AC_RUN_IFELSE([#include "$srcdir/config/config.exceptions.m"],
++	exceptions_work=yes, exceptions_work=no)
++AC_MSG_RESULT($exceptions_work)
++
++if test x"$exceptions_work" = x"no"; then
++  exceptions="no";
++fi 
++
+ if test "$exceptions" = "yes"; then
+   if test x"$have_set_uncaught_exception_handler" = x"no"; then
+     if test x"$have_set_unexpected" = x"no"; then
+Index: config/config.setUncaughtExceptionHandler.m
+===================================================================
+--- config/config.setUncaughtExceptionHandler.m	(revision 33715)
++++ config/config.setUncaughtExceptionHandler.m	(working copy)
+@@ -2,8 +2,12 @@
+ #include "objc-common.g"
+ #include <objc/objc-exception.h>
+ 
++static void handler(id exception)
++{
++}
++
+ int main (void)
+ {
+-  objc_setUncaughtExceptionHandler (0);
++  objc_setUncaughtExceptionHandler(handler);
+   return 0;
+ }
+Index: config/config.exceptions.m
+===================================================================
+--- config/config.exceptions.m	(revision 0)
++++ config/config.exceptions.m	(revision 0)
+@@ -0,0 +1,34 @@
++#include "objc-common.g"
++
++int main (void)
++{
++  NSObject *anObject = [NSObject new];
++
++  BOOL caught = NO;
++  BOOL executedFinally = NO;
++
++  @try
++    {
++      @throw anObject;
++    }
++  @catch (id exception)
++    {
++      if (exception == anObject)
++        {
++          caught = YES;
++        }
++    }
++  @finally
++    {
++      executedFinally = YES;
++    }
++
++  if (caught && executedFinally)
++    {
++      return 0;
++    }
++  else
++    {
++      return 1;
++    }
++}
+Index: config/config.set_unexpected.m
+===================================================================
+--- config/config.set_unexpected.m	(revision 33715)
++++ config/config.set_unexpected.m	(working copy)
+@@ -1,8 +1,12 @@
+ 
+ #include "objc-common.g"
+ 
++static void handler(id exception)
++{
++}
++
+ int main (void)
+ {
+-  objc_set_unexpected(0);
++  objc_set_unexpected(handler);
+   return 0;
+ }

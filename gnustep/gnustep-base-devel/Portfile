@@ -44,6 +44,13 @@ patchfiles-append  patch-configure.diff \
                    patch-configure-blocks.diff
 use_autoreconf     yes
 
+# hack copied from glib2-devel
+pre-configure {
+    set libffi_version      [exec sed -n {s/Version: //p} ${prefix}/lib/pkgconfig/libffi.pc]
+    configure.args-append   --with-ffi-include=${prefix}/lib/libffi-${libffi_version}/include \
+                            --with-ffi-library=${prefix}/lib
+}
+
 startupitem.create  yes
 startupitem.name    gdomap
 set my_pid          ${prefix}/var/run/gdomap.pid

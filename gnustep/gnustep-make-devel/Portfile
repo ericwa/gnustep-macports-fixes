@@ -2,7 +2,7 @@
 
 PortSystem 1.0
 
-name            gnustep-make
+name            gnustep-make-devel
 version         r${svn.revision}
 categories      gnustep devel cross
 platforms       darwin

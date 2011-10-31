@@ -35,6 +35,10 @@ universal_variant   no
 build.args          messages=yes
 use_configure       yes
 
+# for running the base test suite
+test.run            yes
+test.target         check
+
 configure.compiler  macports-gcc-4.4
 depends_build-append port:gcc44
 configure.args-append   --disable-tls

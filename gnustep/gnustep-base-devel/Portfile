@@ -57,24 +57,3 @@ pre-configure {
                             --with-ffi-library=${prefix}/lib
 }
 
-startupitem.create  yes
-startupitem.name    gdomap
-set my_pid          ${prefix}/var/run/gdomap.pid
-startupitem.start   \
-    "GNUSTEP_SYSTEM_ROOT=${prefix}/GNUstep/System" \
-    "\[ -f \$GNUSTEP_SYSTEM_ROOT/Tools/gdomap \] && \\" \
-    "rm -f ${my_pid} && \\" \
-    "\$GNUSTEP_SYSTEM_ROOT/Tools/gdomap -p -I ${my_pid}"
-startupitem.stop    \
-    "\[ -r ${prefix}/var/run/gdomap.pid \] && \\" \
-    "kill -9 `cat ${my_pid}` && \\" \
-    "rm -f ${my_pid}"
-
-platform darwin {
-    post-install { 
-        ui_msg "
-            **** GNUstep 'defaults' tool is renamed 'gdefaults' to avoid\
-            overriding Apple's defaults tool. *****
-        "
-    }
-}

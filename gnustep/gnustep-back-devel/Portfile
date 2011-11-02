@@ -34,5 +34,11 @@ use_configure   yes
 configure.compiler  macports-gcc-4.6
 depends_build-append port:gcc46
 
+configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
+build.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
+destroot.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
+
+# defaults to: --prefix=${prefix}
+configure.pre_args  --prefix=${prefix}/GNUstep
 
 configure.args  --disable-glx

@@ -22,7 +22,10 @@ depends_lib port:gnustep-back-devel
 distfiles
 use_configure no
 build       { }
-destroot    { }
+destroot    {
+	file mkdir ${destroot}${prefix}/GNUstep/System/Library/Documentation
+	system "echo ${long_description} > ${destroot}${prefix}/GNUstep/System/Library/Documentation/README.${name}.txt"
+}
 
 variant dev_tools {
     depends_lib-append  port:ProjectCenter

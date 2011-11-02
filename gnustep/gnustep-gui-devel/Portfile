@@ -32,6 +32,11 @@ depends_lib     port:aspell \
                 port:jpeg \
                 port:tiff
 
+universal_variant   no
+
+configure.compiler  macports-gcc-4.6
+depends_build-append port:gcc46
+
 use_configure   yes
 
 platform darwin {

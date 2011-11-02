@@ -30,8 +30,4 @@ depends_lib     port:gnustep-gui-devel \
 
 use_configure   yes
 
-configure.compiler  macports-gcc-4.6
-depends_build-append port:gcc46
-
-
 configure.args  --disable-glx

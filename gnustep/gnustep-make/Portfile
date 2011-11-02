@@ -28,17 +28,20 @@ checksums           rmd160  a72970e1bf0fa93622981e991717714795cdb7a5 \
 configure.compiler  macports-gcc-4.6
 depends_build-append port:gcc46
 
+# defaults to: --prefix=${prefix}
+configure.pre_args  --prefix=${prefix}/GNUstep
+
 configure.args      --with-library-combo=gnu-gnu-gnu \
                     --with-objc-lib-flag=-lobjc-gnu \
-                    --with-layout=fhs \
-                    --with-config-file=${prefix}/etc/GNUstep/GNUstep.conf
+                    --with-layout=gnustep \
+                    --with-config-file=${prefix}/GNUstep/GNUstep.conf
 
 destroot.args       messages=yes
 
 notes               "\
 ##########################################################
 To have a fully working GNUstep make system, please add
-'. ${prefix}/share/GNUstep/Makefiles/GNUstep.sh'
+'. ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh'
 to your shell login (in ~/.profile)
 ##########################################################
 "

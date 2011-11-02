@@ -3,7 +3,7 @@ depends_lib         port:gnustep-core
 
 # source the GNUstep make shell script.
 pre-build {
-  . ${prefix}/share/GNUstep/Makefiles/GNUstep.sh
+  . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh
 }
 
 use_configure       no

@@ -23,44 +23,9 @@ long_description \
     It provides functionality that aims to implement the non-graphical \
     portion of the OpenStep standard (the Foundation library).
 
-checksums           md5     100e433a7e0624a6e4e5727b87e48c82 \
-                    sha1    98d1881b44f412432547abd7504ad654dc9f711f \
-                    rmd160  056e1d1a40479eddf6cd93b452897896e869733e
+distfiles
 
-depends_lib         port:gnustep-make \
-                    port:libxslt \
-                    port:openssl \
-                    port:libffi
-
-universal_variant   no
-build.args          messages=yes
-use_configure       yes
-
-configure.compiler  macports-gcc-4.4
-depends_build-append port:gcc44
-
-configure.args-append   --disable-tls
-
-startupitem.create  yes
-startupitem.name    gdomap
-set my_pid          ${prefix}/var/run/gdomap.pid
-startupitem.start   \
-    "GNUSTEP_SYSTEM_ROOT=${prefix}/GNUstep/System" \
-    "\[ -f \$GNUSTEP_SYSTEM_ROOT/Tools/gdomap \] && \\" \
-    "rm -f ${my_pid} && \\" \
-    "\$GNUSTEP_SYSTEM_ROOT/Tools/gdomap -p -I ${my_pid}"
-startupitem.stop    \
-    "\[ -r ${prefix}/var/run/gdomap.pid \] && \\" \
-    "kill -9 `cat ${my_pid}` && \\" \
-    "rm -f ${my_pid}"
-
-platform darwin {
-    patchfiles-append       patch-SSL-GNUMakefile.diff
-
-    post-install { 
-        ui_msg "
-            **** GNUstep 'defaults' tool is renamed 'gdefaults' to avoid\
-            overriding Apple's defaults tool. *****
-        "
-    }
+pre-configure {
+    ui_error "gnustep-base is currrently broken, use gnustep-base-devel"
+    return -code error "broken port"
 }

@@ -20,29 +20,9 @@ long_description \
     which handles all of the display system dependent \
     such as specific calls to the X Window System.
 
-depends_lib     port:gnustep-gui \
-                port:Xft2 \
-                port:libart_lgpl \
-                port:xorg-libXt
+distfiles
 
-checksums           md5     314c753ae922082345cf3a288440fa5a \
-                    sha1    04059fc2da1c767be5a1a8c57915b9e1a7bc3a08 \
-                    rmd160  b17eef44a252785adb955fee911711ce23d04031
-
-use_configure   yes
-
-configure.compiler  macports-gcc-4.4
-depends_build-append port:gcc44
-
-configure.args  --enable-graphics=art \
-                --disable-glx
-
-platform macosx {
-    patchfiles-append   patch-ftfont.m \
-                        patch-CairoFaceInfo.h
-}
-
-# works better in quartz-wm
-variant quartzwm {
-    patchfiles-append patch-Source-x11-XGServerWindow.m
+pre-configure {
+    ui_error "gnustep-back is currrently broken, use gnustep-back-devel"
+    return -code error "broken port"
 }

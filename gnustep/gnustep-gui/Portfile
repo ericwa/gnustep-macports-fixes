@@ -21,26 +21,9 @@ long_description \
     lists, browser lists, and windows. There are also many associated \
     classes for handling events, colors, fonts, pasteboards and images.
 
-checksums           md5     03c7ccae799acd104c7515c44831626b \
-                    sha1    42a56409836df6e8c30506eab03d8ea297af01f5 \
-                    rmd160  94eef129b73bcfc08fdf85a82c1f973ddc05235e
+distfiles
 
-depends_lib     port:aspell \
-                port:gnustep-base \
-                port:gnutls \
-                port:libpng \
-                path:include/gif_lib.h:giflib \
-                port:jpeg \
-                port:tiff
-
-universal_variant   no
-
-configure.compiler  macports-gcc-4.4
-depends_build-append port:gcc44
-
-use_configure   yes
-
-platform darwin {
-    configure.args-append   --disable-cups \
-                            --disable-sound
+pre-configure {
+    ui_error "gnustep-gui is currrently broken, use gnustep-gui-devel"
+    return -code error "broken port"
 }

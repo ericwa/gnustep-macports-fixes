@@ -2,9 +2,7 @@ categories          gnustep
 depends_lib         port:gnustep-core
 
 # source the GNUstep make shell script.
-pre-build {
-  . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh
-}
+build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh && make
 
 use_configure       no
 

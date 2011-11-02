@@ -1,10 +1,10 @@
 # $Id: Portfile 84710 2011-09-30 09:02:16Z jmr@macports.org $
 
 PortSystem 1.0
-PortGroup   gnustep 1.0
 
 name                gnustep-base-devel
 version             r${svn.revision}
+categories      gnustep devel cross
 revision            1
 platforms           darwin
 # libs are LGPL, tools are GPL
@@ -15,6 +15,7 @@ fetch.type          svn
 svn.url             svn://svn.gna.org/svn/gnustep/libs/base/trunk
 worksrcdir          trunk
 
+homepage            http://www.gnustep.org/
 description         A library of general-purpose Objective C objects.
 long_description \
     The GNUstep Base Library is a library of general-purpose, non-graphical \

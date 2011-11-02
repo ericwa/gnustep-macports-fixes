@@ -1,14 +1,15 @@
 # $Id: Portfile 84713 2011-09-30 09:03:55Z jmr@macports.org $
 
 PortSystem  1.0
-PortGroup   gnustep 1.0
 
 name        gnustep-core
 version     0.18.1
+categories  gnustep devel cross
 platforms   darwin
-license     BSD
+license     {LGPL GPL-3+}
 maintainers nomaintainer
 
+homepage    http://www.gnustep.org/
 description  GNUstep core / Startup package
 long_description \
     Startup is a compilation of the core GNUstep libraries. \
@@ -16,15 +17,12 @@ long_description \
     you will have a complete system for compiling and running \
     GNUstep applications.
     
-depends_lib port:gnustep-back
+depends_lib port:gnustep-back-devel
 
 distfiles
 use_configure no
 build       { }
-destroot    {
-	file mkdir ${destroot}${prefix}/GNUstep/system/Library/Documentation
-	system "echo ${long_description} > ${destroot}${prefix}/GNUstep/system/Library/Documentation/README.${name}.txt"
-}
+destroot    { }
 
 variant dev_tools {
     depends_lib-append  port:ProjectCenter

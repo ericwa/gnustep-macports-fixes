@@ -4,7 +4,7 @@ PortSystem 1.0
 PortGroup  gnustep 1.0
 
 name			Renaissance
-version			0.8.0
+version			0.9.0
 platforms		darwin
 maintainers		nomaintainer
 description		create user interfaces via XML files
@@ -16,8 +16,11 @@ long_description	GNUstep Renaissance allows you to describe your user \
 
 homepage		http://www.gnustep.it/Renaissance/
 master_sites	${homepage}/Download/
-checksums		md5 520d8fe210491b5646bb4743a72560b1
+checksums       md5     2209c96543ed0a03b1b8ee22bf3a8f35
 
-depends_lib	    port:gnustep-gui
+depends_lib	    port:gnustep-back-devel
 
-build.args-append LINK_AGAINST_ALL_LIBS=yes
+
+use_configure   no
+universal_variant   no
+build.cmd       . ${prefix}/share/GNUstep/Makefiles/GNUstep.sh && make messages=yes

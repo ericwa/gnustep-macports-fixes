@@ -1,0 +1,21 @@
+Index: Source/x11/XGServerWindow.m
+===================================================================
+--- Source/x11/XGServerWindow.m	(revision 34112)
++++ Source/x11/XGServerWindow.m	(working copy)
+@@ -25,7 +25,6 @@
+ */
+ 
+ #include "config.h"
+-#include <math.h>
+ #include <Foundation/NSString.h>
+ #include <Foundation/NSArray.h>
+ #include <Foundation/NSDebug.h>
+@@ -44,6 +43,8 @@
+ #include <AppKit/NSImage.h>
+ #include <AppKit/NSBitmapImageRep.h>
+ 
++#include <math.h>
++
+ #ifdef HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif

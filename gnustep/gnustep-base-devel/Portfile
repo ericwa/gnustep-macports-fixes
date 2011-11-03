@@ -59,7 +59,8 @@ patchfiles-append  patch-configure.diff \
                    patch-exceptions.diff
 use_autoreconf     yes
 
-# hack copied from glib2-devel
+# hack copied from glib2-devel. FIXME: the base configure script should be fixed to use
+# pkgconfig to find libffi if the regular autoconf macros can't find libffi
 pre-configure {
     set libffi_version      [exec sed -n {s/Version: //p} ${prefix}/lib/pkgconfig/libffi.pc]
     configure.args-append   --with-ffi-include=${prefix}/lib/libffi-${libffi_version}/include \

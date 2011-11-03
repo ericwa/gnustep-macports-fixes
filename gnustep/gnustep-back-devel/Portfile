@@ -14,6 +14,11 @@ fetch.type          svn
 svn.url             svn://svn.gna.org/svn/gnustep/libs/back/trunk
 worksrcdir          trunk
 
+
+# prevent obscure bug caused by including math.h before any gnustep headers.
+# math.h can in some circumstances include apple's /usr/include/AvailabilityMacros.h which
+# messes up GNUstep's availability macros, if it is included before them. should probably
+# investigate further.
 patchfiles-append  patch-movemathhinclude.diff
 
 homepage        http://www.gnustep.org/

@@ -50,3 +50,6 @@ configure.pre_args  --prefix=${prefix}/GNUstep
 
 configure.args  --disable-glx \
                 --enable-graphics=xlib
+                
+# we install into ${prefix}/GNUstep which is a violation of the macports filesystem standard
+destroot.violate_mtree  yes

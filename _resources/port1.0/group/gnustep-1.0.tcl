@@ -8,3 +8,6 @@ use_configure       no
 
 # FIXME: not sure if this is needed
 universal_variant   no
+
+# we install into ${prefix}/GNUstep which is a violation of the macports filesystem standard
+destroot.violate_mtree  yes

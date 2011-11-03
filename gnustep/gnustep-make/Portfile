@@ -44,6 +44,9 @@ configure.args      --with-library-combo=gnu-gnu-gnu \
 
 destroot.args       messages=yes
 
+# we install into ${prefix}/GNUstep which is a violation of the macports filesystem standard
+destroot.violate_mtree  yes
+
 notes               "\
 ##########################################################
 To have a fully working GNUstep make system, please add

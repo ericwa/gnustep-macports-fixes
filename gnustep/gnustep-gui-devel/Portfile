@@ -50,3 +50,6 @@ platform darwin {
     configure.args-append   --disable-cups \
                             --disable-sound
 }
+
+# we install into ${prefix}/GNUstep which is a violation of the macports filesystem standard
+destroot.violate_mtree  yes

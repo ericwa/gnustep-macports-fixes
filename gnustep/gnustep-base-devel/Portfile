@@ -67,3 +67,6 @@ pre-configure {
                             --with-ffi-library=${prefix}/lib
 }
 
+# we install into ${prefix}/GNUstep which is a violation of the macports filesystem standard
+destroot.violate_mtree  yes
+

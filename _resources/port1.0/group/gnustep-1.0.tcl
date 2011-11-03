@@ -6,6 +6,14 @@ build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh && make
 
 use_configure       no
 
+depends_build-append port:gcc46
+
+# if we do use configure...
+configure.compiler  macports-gcc-4.6
+configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
+# defaults to: --prefix=${prefix}
+configure.pre_args  --prefix=${prefix}/GNUstep
+
 # FIXME: not sure if this is needed
 universal_variant   no
 

@@ -40,7 +40,8 @@ configure.pre_args  --prefix=${prefix}/GNUstep
 configure.args      --with-library-combo=gnu-gnu-gnu \
                     --with-objc-lib-flag=-lobjc-gnu \
                     --with-layout=gnustep \
-                    --with-config-file=${prefix}/GNUstep/GNUstep.conf
+                    --with-config-file=${prefix}/GNUstep/GNUstep.conf \
+                    --enable-debug-by-default
 
 destroot.args       messages=yes
 

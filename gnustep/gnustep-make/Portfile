@@ -31,6 +31,12 @@ depends_build-append port:gcc46
 # defaults to: --prefix=${prefix}
 configure.pre_args  --prefix=${prefix}/GNUstep
 
+# we can not use the fhs layout, because that uses /opt/local/lib as the GNUstep system library
+# directory, and gnustep-make adds the system library directory to DYLD_LIBRARY_PATH when 
+# GNUstep.sh is sourced. 
+# having /opt/local/lib in DYLD_LIBRARY_PATH can mess up macports. e.g. pkg-config 
+# will stop working because it loads the macports libjpeg when it should load the system
+# libjpeg.
 configure.args      --with-library-combo=gnu-gnu-gnu \
                     --with-objc-lib-flag=-lobjc-gnu \
                     --with-layout=gnustep \

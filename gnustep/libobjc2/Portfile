@@ -1,5 +1,4 @@
 PortSystem 1.0
-PortGroup   gnustep 1.0
 
 name                libobjc2
 version             4.6.0
@@ -41,5 +40,5 @@ long_description \
 universal_variant   no
 use_configure       no
 
-configure.compiler  macports-gcc-4.4
-depends_build-append port:gcc44
+patchfiles-append   patch-macosx.diff
+destroot.args	    PREFIX=${destroot}${prefix}

@@ -1,0 +1,92 @@
+Index: block_trampolines.S
+===================================================================
+--- block_trampolines.S	(revision 34166)
++++ block_trampolines.S	(working copy)
+@@ -12,6 +12,7 @@
+ # with the correct first argument, the self pointer moved to the second real
+ # argument (the first block argument) and the _cmd parameter excised
+ 
++#ifndef __APPLE__
+ .file	"block_trampolines.S"
+ #if __arm__
+ .syntax unified
+@@ -79,3 +80,4 @@
+ __objc_block_trampoline_sret:
+ __objc_block_trampoline_end_sret:
+ #endif
++#endif
+Index: Makefile
+===================================================================
+--- Makefile	(revision 34166)
++++ Makefile	(working copy)
+@@ -11,7 +11,7 @@
+ LIBOBJC=libobjc
+ LIBOBJCXX=libobjcxx
+ 
+-SILENT=@
++#SILENT=@
+ 
+ CFLAGS += -std=gnu99 -fPIC -fexceptions
+ CXXFLAGS += -fPIC -fexceptions
+@@ -67,11 +67,11 @@
+ 
+ $(LIBOBJCXX).so.$(VERSION): $(LIBOBJC).so.$(VERSION) $(OBJCXX_OBJECTS)
+ 	$(SILENT)echo Linking shared Objective-C++ runtime library...
+-	$(SILENT)$(CXX) -shared -o $@ $(OBJCXX_OBJECTS)
++	$(SILENT)$(CXX) -shared -L. -l$(LIBOBJCLIBNAME) -o $@ $(OBJCXX_OBJECTS)
+ 
+-$(LIBOBJC).so.$(VERSION): $(OBJECTS)
++$(LIBOBJC).so.$(VERSION): $(OBJECTS) $(OBJCXX_OBJECTS)
+ 	$(SILENT)echo Linking shared Objective-C runtime library...
+-	$(SILENT)$(CC) -shared -rdynamic -o $@ $(OBJECTS)
++	$(SILENT)$(CC) -shared -rdynamic -lstdc++ -o $@ $(OBJECTS) $(OBJCXX_OBJECTS)
+ 
+ $(LIBOBJC).a: $(OBJECTS)
+ 	$(SILENT)echo Linking static Objective-C runtime library...
+@@ -87,7 +87,7 @@
+ 
+ .m.o: Makefile
+ 	$(SILENT)echo Compiling `basename $<`...
+-	$(SILENT)$(CC) $(CPPFLAGS) $(CFLAGS) -fobjc-exceptions -c $< -o $@
++	$(SILENT)$(CC) $(CPPFLAGS) $(CFLAGS) -fobjc-exceptions -fgnu-runtime -c $< -o $@
+ 
+ .S.o: Makefile
+ 	$(SILENT)echo Assembling `basename $<`...
+Index: block_to_imp.c
+===================================================================
+--- block_to_imp.c	(revision 34166)
++++ block_to_imp.c	(working copy)
+@@ -66,6 +66,9 @@
+ 
+ IMP imp_implementationWithBlock(void *block)
+ {
++#ifdef __APPLE__
++	return 0;
++#else
+ 	struct block_literal *b = block;
+ 	void *start;
+ 	void *end;
+@@ -93,6 +96,7 @@
+ 	memcpy(&out[2], start, trampolineSize);
+ 	out = buf.x;
+ 	return (IMP)&out[2];
++#endif
+ }
+ 
+ static void* isBlockIMP(void *anIMP)
+Index: objc_msgSend.S
+===================================================================
+--- objc_msgSend.S	(revision 34166)
++++ objc_msgSend.S	(working copy)
+@@ -1,3 +1,4 @@
++#ifndef __APPLE__
+ #if __x86_64
+ #include "objc_msgSend.x86-64.S"
+ #elif __i386
+@@ -7,3 +8,6 @@
+ #else
+ #warning objc_msgSend() not implemented for your architecture
+ #endif
++#else
++#watning objc_msgSend() not implement on Mac OS X
++#endif

@@ -40,17 +40,17 @@ Index: Makefile
  $(LIBOBJCXX).so.$(VERSION): $(LIBOBJC).so.$(VERSION) $(OBJCXX_OBJECTS)
  	$(SILENT)echo Linking shared Objective-C++ runtime library...
 -	$(SILENT)$(CXX) -shared -o $@ $(OBJCXX_OBJECTS)
-+	$(SILENT)$(CXX) $(LDFLAGS) -shared -undefined dynamic_lookup -o $@ $(OBJCXX_OBJECTS)
++	$(SILENT)$(CXX) $(LDFLAGS) -shared -undefined dynamic_lookup -install_name $(LIBRARY_PATH)/$@ -o $@ $(OBJCXX_OBJECTS)
  
  $(LIBOBJC).so.$(VERSION): $(OBJECTS)
  	$(SILENT)echo Linking shared Objective-C runtime library...
 -	$(SILENT)$(CC) -shared -rdynamic -o $@ $(OBJECTS)
-+	$(SILENT)$(CC) $(LDFLAGS) -shared -rdynamic -undefined dynamic_lookup -o $@ $(OBJECTS)
++	$(SILENT)$(CC) $(LDFLAGS) -shared -rdynamic -undefined dynamic_lookup -install_name $(LIBRARY_PATH)/$@ -o $@ $(OBJECTS)
  
  $(LIBOBJC).a: $(OBJECTS)
  	$(SILENT)echo Linking static Objective-C runtime library...
 -	$(SILENT)ld -r -s -o $@ $(OBJECTS)
-+	$(SILENT)ld $(LDFLAGS) -r -s -o $@ $(OBJECTS)
++	$(SILENT)ld $(LDFLAGS) -r -s -install_name $(LIBRARY_PATH)/$@ -o $@ $(OBJECTS)
  
  .cc.o: Makefile
  	$(SILENT)echo Compiling `basename $<`...

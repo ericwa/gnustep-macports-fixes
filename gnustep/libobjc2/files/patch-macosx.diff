@@ -19,9 +19,16 @@ Index: Makefile
 ===================================================================
 --- Makefile	(revision 34166)
 +++ Makefile	(working copy)
-@@ -11,7 +11,7 @@
- LIBOBJC=libobjc
- LIBOBJCXX=libobjcxx
+@@ -7,11 +7,11 @@
+ SUBMINOR_VERSION = 0
+ VERSION = $(MAJOR_VERSION).$(MINOR_VERSION).$(SUBMINOR_VERSION)
+ 
+-LIBOBJCLIBNAME=objc
+-LIBOBJC=libobjc
+-LIBOBJCXX=libobjcxx
++LIBOBJCLIBNAME=objc-gnu
++LIBOBJC=libobjc-gnu
++LIBOBJCXX=libobjcxx-gnu
  
 -SILENT=@
 +#SILENT=@

@@ -41,9 +41,6 @@ use_configure       yes
 test.run            yes
 test.target         check
 
-configure.compiler  macports-gcc-4.6
-depends_build-append port:gcc46
-
 
 configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
 build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh && make

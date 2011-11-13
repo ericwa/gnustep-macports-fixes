@@ -52,7 +52,6 @@ configure.args-append   --disable-tls
 
 # use_autoreconf to regenerate configure because the patch updates configure.ac
 patchfiles-append  patch-configure.diff \
-                   patch-configure-blocks.diff \
                    patch-exceptions.diff
 use_autoreconf     yes
 

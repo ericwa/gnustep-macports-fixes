@@ -52,7 +52,8 @@ configure.args-append   --disable-tls
 
 # use_autoreconf to regenerate configure because the patch updates configure.ac
 patchfiles-append  patch-configure.diff \
-                   patch-exceptions.diff
+                   patch-exceptions.diff \
+                   patch-gsprivate.diff
 use_autoreconf     yes
 
 # hack copied from glib2-devel. FIXME: the base configure script should be fixed to use

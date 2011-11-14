@@ -1,0 +1,20 @@
+Index: Source/GSPrivate.h
+===================================================================
+--- Source/GSPrivate.h	(revision 34168)
++++ Source/GSPrivate.h	(working copy)
+@@ -33,11 +33,11 @@
+ 
+ @class	NSNotification;
+ 
+-#if ( (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 3) ) && HAVE_VISIBILITY_ATTRIBUTE )
+-#define GS_ATTRIB_PRIVATE __attribute__ ((visibility("internal")))
+-#else
++//#if ( (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 3) ) && HAVE_VISIBILITY_ATTRIBUTE )
++//#define GS_ATTRIB_PRIVATE __attribute__ ((visibility("internal")))
++//#else
+ #define GS_ATTRIB_PRIVATE
+-#endif
++//#endif
+ 
+ /* Absolute Gregorian date for NSDate reference date Jan 01 2001
+  *

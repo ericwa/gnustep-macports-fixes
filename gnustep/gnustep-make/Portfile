@@ -27,6 +27,8 @@ master_sites        gnustep:core
 checksums           rmd160  a72970e1bf0fa93622981e991717714795cdb7a5 \
                     sha256  c48b0a4c85eee4799b12cceeb327c470b168100cbcda4f111b1edad71f8762eb
 
+configure.compiler  clang
+
 # defaults to: --prefix=${prefix}
 configure.pre_args  --prefix=${prefix}/GNUstep
 

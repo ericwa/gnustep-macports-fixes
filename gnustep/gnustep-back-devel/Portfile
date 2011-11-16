@@ -45,6 +45,8 @@ build.args-append messages=yes
 # defaults to: --prefix=${prefix}
 configure.pre_args  --prefix=${prefix}/GNUstep
 
+configure.compiler  clang
+
 configure.args  --disable-glx \
                 --enable-graphics=xlib
                 

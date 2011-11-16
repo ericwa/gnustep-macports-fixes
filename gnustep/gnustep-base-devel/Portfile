@@ -41,6 +41,7 @@ use_configure       yes
 test.run            yes
 test.target         check
 
+configure.compiler  clang
 
 configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
 build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh && make

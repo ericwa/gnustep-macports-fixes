@@ -36,6 +36,7 @@ depends_lib     port:aspell \
 universal_variant   no
 
 use_configure   yes
+configure.compiler  clang
 
 configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
 build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh && make

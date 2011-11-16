@@ -27,9 +27,7 @@ long_description \
 
 depends_lib     port:aspell \
                 port:gnustep-base-devel \
-                port:gnutls \
                 port:libpng \
-                path:include/gif_lib.h:giflib \
                 port:jpeg \
                 port:tiff
 

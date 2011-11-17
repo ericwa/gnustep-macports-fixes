@@ -5,9 +5,13 @@ homepage            http://www.gnustep.org/
 master_sites        gnustep:core
 
 # source the GNUstep make shell script.
-build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh || make
+pre-build {
+    set gsmakefile    ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh
+    if { [file exists ${gsmakefile}] } {
+      system "source ${gsmakefile}"
+    }
+}
 build.args      messages=yes
-
 
 # typically configure is not needed; just use GNUstep make
 use_configure       no
@@ -16,8 +20,10 @@ use_configure       no
 
 platform darwin 10 { # 10.6
     # system provided clang 1.6 doesn't work
-    configure.compiler  macports-clang-3.0
-    depends_build       clang-3.0
+    configure.cc  clang-mp-3.0
+    configure.cxx clang++-mp-3.0
+    configure.cpp clang-mp-3.0
+    depends_build port:clang-3.0
 }
 platform darwin 11 { # 10.7
     # use the system provided clang compiler.

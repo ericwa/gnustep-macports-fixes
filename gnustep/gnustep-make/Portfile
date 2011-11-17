@@ -35,6 +35,7 @@ configure.args      --with-library-combo=gnu-gnu-gnu \
                     --with-layout=gnustep \
                     --with-config-file=${prefix}/GNUstep/GNUstep.conf \
                     --enable-debug-by-default
+use_configure       yes
 
 notes               "\
 ##########################################################

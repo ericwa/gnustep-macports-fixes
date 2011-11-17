@@ -13,7 +13,17 @@ build.args      messages=yes
 use_configure       no
 
 # but if we do use configure...
-configure.compiler  clang
+
+platform darwin 10 { # 10.6
+    # system provided clang 1.6 doesn't work
+    configure.compiler  macports-clang-3.0
+    depends_build       clang-3.0
+}
+platform darwin 11 { # 10.7
+    # use the system provided clang compiler.
+    # note that the system llvm-gcc-4.2 won't work because -fconstant-string-class is broken on that compiler
+    configure.compiler  clang
+}
 
 configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
 

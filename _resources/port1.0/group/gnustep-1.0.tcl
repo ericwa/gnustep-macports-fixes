@@ -6,9 +6,9 @@ master_sites        gnustep:core
 
 # source the GNUstep make shell script.
 pre-build {
-    set gsmakefile    ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh
+    set gsmakefile    "${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh"
     if { [file exists ${gsmakefile}] } {
-      system "source ${gsmakefile}"
+      build.cmd     . ${gsmakefile} && make
     }
 }
 build.args      messages=yes

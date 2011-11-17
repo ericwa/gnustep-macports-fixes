@@ -6,6 +6,9 @@ master_sites        gnustep:core
 
 # source the GNUstep make shell script.
 pre-build {
+    # the file will not exist when we are building gnustep-make (since that is the package that
+    # installs it.) gnustep-make still includes this portgroup because all of the other settings
+    # in here are relevant.
     set gsmakefile    "${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh"
     if { [file exists ${gsmakefile}] } {
       build.cmd     . ${gsmakefile} && make

@@ -32,9 +32,9 @@ long_description \
     such as specific calls to the X Window System.
 
 depends_lib     port:gnustep-gui-devel \
-                port:cairo \
                 port:xorg-libXt \
-                port:xorg-libXext
+                port:xorg-libXext \
+                port:Xft2
 
 use_configure   yes
 

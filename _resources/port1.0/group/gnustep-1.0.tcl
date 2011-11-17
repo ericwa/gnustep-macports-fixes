@@ -18,17 +18,16 @@ use_configure       no
 
 # but if we do use configure...
 
-platform darwin 10 { # 10.6
-    # system provided clang 1.6 doesn't work
-    configure.cc  clang-mp-3.0
-    configure.cxx clang++-mp-3.0
-    configure.cpp clang-mp-3.0
-    depends_build port:clang-3.0
-}
+# for platform <= 10.6
+# system provided clang 1.6 doesn't work
+configure.compiler      macports-clang
+depends_build-append    port:clang-3.0
+
 platform darwin 11 { # 10.7
     # use the system provided clang compiler.
     # note that the system llvm-gcc-4.2 won't work because -fconstant-string-class is broken on that compiler
-    configure.compiler  clang
+    depends_build-delete    port:clang-3.0
+    configure.compiler      clang
 }
 
 configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles

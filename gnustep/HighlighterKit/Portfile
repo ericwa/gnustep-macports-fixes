@@ -17,7 +17,3 @@ master_sites    http://download.gna.org/pmanager/0.2/
 checksums	    md5 ad0fb97126da238cbfdb1a7eb0a5f7e4
 
 depends_lib     port:gnustep-gui
-
-array set gnustep.post_flags {
-    .   "-lobjc -lgnustep-base -lgnustep-gui"
-}

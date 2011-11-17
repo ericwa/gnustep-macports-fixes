@@ -1,8 +1,7 @@
-# $Id: Portfile 84713 2011-09-30 09:03:55Z jmr@macports.org $
-
 # this is basically a dummy port which pulls in gnustep-make, base, back and gui as dependencies
 
 PortSystem  1.0
+PortGroup   gnustep 1.0
 
 name        gnustep-core
 version     0.18.1
@@ -11,7 +10,6 @@ platforms   darwin
 license     {LGPL GPL-3+}
 maintainers nomaintainer
 
-homepage    http://www.gnustep.org/
 description  GNUstep core / Startup package
 long_description \
     Startup is a compilation of the core GNUstep libraries. \
@@ -30,10 +28,3 @@ destroot    {
 	file mkdir ${destroot}${prefix}/GNUstep/System/Library/Documentation
 	system "echo ${long_description} > ${destroot}${prefix}/GNUstep/System/Library/Documentation/README.${name}.txt"
 }
-
-variant dev_tools {
-    depends_lib-append  port:ProjectCenter
-}
-
-# we install into ${prefix}/GNUstep which is a violation of the macports filesystem standard
-destroot.violate_mtree  yes

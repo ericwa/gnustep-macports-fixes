@@ -16,6 +16,7 @@ platforms	darwin
 homepage	http://www.gnustep.it/marko/GPSText/
 
 depends_run	port:ImageMagick port:psutils port:a2ps
+depends_lib   port:gnustep-core
 
 distname		Yap
 distfiles		Yap.tgz

@@ -1,5 +1,3 @@
-# $Id: Portfile 84730 2011-09-30 11:30:19Z jmr@macports.org $
-
 PortSystem  1.0
 PortGroup   gnustep 1.0
 
@@ -21,3 +19,5 @@ long_description \
 fetch.type      svn
 svn.url         svn://svn.gna.org/svn/gnustep/apps/systempreferences/trunk
 worksrcdir      trunk
+
+depends_lib     port:gnustep-core

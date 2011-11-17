@@ -20,7 +20,3 @@ master_sites    ${homepage}
 checksums       md5 e7524b27588b1705d4b6cc1fcdd21f1f
 distname        systempreferences-${version}
 worksrcdir      ${worksrcdir}/${name}
-
-array set gnustep.post_flags {
-    . "-lobjc -lgnustep-base"
-}

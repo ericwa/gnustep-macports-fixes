@@ -14,13 +14,10 @@ description  Simple OO Interface to SQL databases
 long_description \
     ${description}
 
-depends_lib   port:Performance port:sqlite3    
+depends_lib   port:Performance port:sqlite3 port:gnustep-base
 master_sites  gnustep:libs
 checksums     md5 c26320a747092baa72dc7fb51994ae61
 
-array set gnustep.post_flags {
-    . "-lobjc -lgnustep-base"
-}
 post-patch {
     reinplace "s|BUNDLE_LIBS +=|BUNDLE_LIBS += -lPerformance -lSQLClient|g" \
         ${worksrcpath}/GNUmakefile

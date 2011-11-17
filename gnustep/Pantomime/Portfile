@@ -17,8 +17,3 @@ checksums			md5 06ee16477aacf7c5031936997723c791
 
 depends_lib         port:gnustep-base
 worksrcdir			${name}
-
-post-patch {
-    reinplace "s|lcrypto|lcrypto -liconv -lgnustep-base|" \
-        ${worksrcpath}/Framework/Pantomime/GNUmakefile
-}

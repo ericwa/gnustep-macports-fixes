@@ -1,5 +1,3 @@
-# $Id: Portfile 84710 2011-09-30 09:02:16Z jmr@macports.org $
-
 PortSystem 1.0
 PortGroup   gnustep 1.0
 

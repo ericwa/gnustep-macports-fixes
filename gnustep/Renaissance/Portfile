@@ -17,3 +17,5 @@ long_description	GNUstep Renaissance allows you to describe your user \
 homepage		http://www.gnustep.it/Renaissance/
 master_sites	${homepage}/Download/
 checksums       md5     2209c96543ed0a03b1b8ee22bf3a8f35
+
+depends_lib       port:gnustep-core

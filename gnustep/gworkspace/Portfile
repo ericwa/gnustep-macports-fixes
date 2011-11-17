@@ -1,5 +1,3 @@
-# $Id: Portfile 84731 2011-09-30 11:30:55Z jmr@macports.org $
-
 PortSystem  1.0
 PortGroup   gnustep 1.0
 
@@ -16,7 +14,7 @@ long_description \
     real-time auditing of the file-system, \
     an advanced database based search system, etc.
 
-depends_lib-append port:system-preferences
+depends_lib     port:gnustep-core port:system-preferences
 
 fetch.type      svn
 svn.url         svn://svn.gna.org/svn/gnustep/apps/gworkspace/trunk

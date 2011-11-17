@@ -14,3 +14,5 @@ long_description \
 
 master_sites    http://download.gna.org/pmanager/0.2/
 checksums	    md5 f4ded05bf452e17ce932aecb72a220a6
+
+depends_lib     port:gnustep-core

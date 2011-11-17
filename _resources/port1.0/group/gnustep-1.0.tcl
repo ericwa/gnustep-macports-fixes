@@ -1,14 +1,22 @@
+# this contains common settings for GNUstep
+
 categories          gnustep
-depends_lib         port:gnustep-core
+homepage            http://www.gnustep.org/
+master_sites        gnustep:core
 
 # source the GNUstep make shell script.
-build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh && make
+build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh || make
+build.args      messages=yes
 
+
+# typically configure is not needed; just use GNUstep make
 use_configure       no
 
-# if we do use configure...
+# but if we do use configure...
 configure.compiler  clang
+
 configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
+
 # defaults to: --prefix=${prefix}
 configure.pre_args  --prefix=${prefix}/GNUstep
 

@@ -9,7 +9,6 @@ platforms   darwin
 # libs are LGPL, tools are GPL
 license     {LGPL GPL-3+}
 maintainers nomaintainer
-master_sites        gnustep:core
 
 description A back-end component for the GNUstep GUI Library.
 long_description \

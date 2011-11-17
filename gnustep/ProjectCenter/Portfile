@@ -19,6 +19,8 @@ long_description \
 master_sites  gnustep:dev-apps
 checksums     md5 d7751435e4a94a6d198d7fa627a634f5
 
+depends_lib   port:gnustep-core
+
 array set gnustep.post_flags {
     Library "-lgnustep-base"
 }

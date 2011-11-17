@@ -1,5 +1,7 @@
 PortSystem 1.0
 
+#NOTE: does not GNUstep-make! does not use gnustep portgroup!
+
 name                libobjc2
 version             4.6.0
 revision            1

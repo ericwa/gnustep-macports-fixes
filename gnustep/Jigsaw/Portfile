@@ -18,3 +18,5 @@ master_sites    ${homepage}
 checksums       md5 3dab130a0c37f6b051858e2bccff338d
 extract.suffix  .tgz
 distname        ${name}
+
+depends_lib     port:gnustep-core

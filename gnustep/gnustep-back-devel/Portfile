@@ -1,10 +1,11 @@
 # $Id: Portfile 84712 2011-09-30 09:03:20Z jmr@macports.org $
 
 PortSystem  1.0
+PortGroup   gnustep 1.0
 
 name        gnustep-back-devel
 version     r${svn.revision}
-categories      gnustep devel cross
+categories  gnustep devel cross
 platforms   darwin
 # libs are LGPL, tools are GPL
 license     {LGPL GPL-3+}
@@ -14,14 +15,12 @@ fetch.type          svn
 svn.url             svn://svn.gna.org/svn/gnustep/libs/back/trunk
 worksrcdir          trunk
 
-
 # prevent obscure bug caused by including math.h before any gnustep headers.
 # math.h can in some circumstances include apple's /usr/include/AvailabilityMacros.h which
 # messes up GNUstep's availability macros, if it is included before them. should probably
 # investigate further.
 patchfiles-append  patch-movemathhinclude.diff
 
-homepage        http://www.gnustep.org/
 description A back-end component for the GNUstep GUI Library.
 long_description \
     The implementation of the GNUstep GUI Library is designed \
@@ -38,17 +37,5 @@ depends_lib     port:gnustep-gui-devel \
 
 use_configure   yes
 
-configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
-build.cmd       . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh && make
-build.args-append messages=yes
-
-# defaults to: --prefix=${prefix}
-configure.pre_args  --prefix=${prefix}/GNUstep
-
-configure.compiler  clang
-
 configure.args  --disable-glx \
                 --enable-graphics=xlib
-                
-# we install into ${prefix}/GNUstep which is a violation of the macports filesystem standard
-destroot.violate_mtree  yes

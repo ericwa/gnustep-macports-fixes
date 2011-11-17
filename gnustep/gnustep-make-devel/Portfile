@@ -1,6 +1,5 @@
-# $Id: Portfile 86447 2011-10-26 00:14:09Z ryandesign@macports.org $
-
 PortSystem 1.0
+PortGroup  gnustep 1.0
 
 name            gnustep-make-devel
 version         r${svn.revision}

@@ -1,6 +1,5 @@
-# $Id: Portfile 86447 2011-10-26 00:14:09Z ryandesign@macports.org $
-
 PortSystem 1.0
+PortGroup  gnustep 1.0
 
 name            gnustep-make
 version         2.6.1
@@ -11,7 +10,6 @@ maintainers     nomaintainer
 supported_archs noarch
 installs_libs   no
 
-homepage        http://www.gnustep.org/
 description     GNUstep makefile package
 long_description \
     The GNUstep makefile package is a simple, powerful and extensible way to \
@@ -22,15 +20,9 @@ long_description \
 
 depends_lib         port:libobjc2
 
-master_sites        gnustep:core
-
 checksums           rmd160  a72970e1bf0fa93622981e991717714795cdb7a5 \
                     sha256  c48b0a4c85eee4799b12cceeb327c470b168100cbcda4f111b1edad71f8762eb
 
-configure.compiler  clang
-
-# defaults to: --prefix=${prefix}
-configure.pre_args  --prefix=${prefix}/GNUstep
 
 # we can not use the fhs layout, because that uses /opt/local/lib as the GNUstep system library
 # directory, and gnustep-make adds the system library directory to DYLD_LIBRARY_PATH when 
@@ -43,11 +35,6 @@ configure.args      --with-library-combo=gnu-gnu-gnu \
                     --with-layout=gnustep \
                     --with-config-file=${prefix}/GNUstep/GNUstep.conf \
                     --enable-debug-by-default
-
-destroot.args       messages=yes
-
-# we install into ${prefix}/GNUstep which is a violation of the macports filesystem standard
-destroot.violate_mtree  yes
 
 notes               "\
 ##########################################################

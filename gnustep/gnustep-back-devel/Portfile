@@ -3,17 +3,19 @@
 PortSystem  1.0
 PortGroup   gnustep 1.0
 
+fetch.type          svn
+svn.url             svn://svn.gna.org/svn/gnustep/libs/back/trunk
+svn.revision        34196
+worksrcdir          trunk
+
 name        gnustep-back-devel
-version     r${svn.revision}
+version     0.20.0-${svn.revision}
 categories  gnustep devel cross
 platforms   darwin
 # libs are LGPL, tools are GPL
 license     {LGPL GPL-3+}
 maintainers nomaintainer
 
-fetch.type          svn
-svn.url             svn://svn.gna.org/svn/gnustep/libs/back/trunk
-worksrcdir          trunk
 
 # prevent obscure bug caused by including math.h before any gnustep headers.
 # math.h can in some circumstances include apple's /usr/include/AvailabilityMacros.h which

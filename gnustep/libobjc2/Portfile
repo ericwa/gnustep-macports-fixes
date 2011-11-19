@@ -2,16 +2,17 @@ PortSystem 1.0
 
 #NOTE: does not GNUstep-make! does not use gnustep portgroup!
 
+fetch.type          svn
+svn.url             svn://svn.gna.org/svn/gnustep/libs/libobjc2/trunk
+svn.revision        34196
+worksrcdir          trunk
+
 name                libobjc2
-version             4.6.0
+version             4.6.0-${svn.revision}
 revision            1
 platforms           darwin
 license             MIT
 maintainers         nomaintainer
-
-fetch.type          svn
-svn.url             svn://svn.gna.org/svn/gnustep/libs/libobjc2/trunk
-worksrcdir          trunk
 
 description         The GNUstep Objective-C runtime
 long_description \

@@ -1,8 +1,13 @@
 PortSystem  1.0
 PortGroup   gnustep 1.0
 
+fetch.type      svn
+svn.url         svn://svn.gna.org/svn/gnustep/apps/gworkspace/trunk
+svn.revision    34196
+worksrcdir      trunk
+
 name        gworkspace
-version     0.9.0-svn
+version     0.9.0-${svn.revision}
 platforms   darwin
 license     GPL-2+
 maintainers nomaintainer
@@ -16,8 +21,6 @@ long_description \
 
 depends_lib     port:gnustep-core port:system-preferences
 
-fetch.type      svn
-svn.url         svn://svn.gna.org/svn/gnustep/apps/gworkspace/trunk
-worksrcdir      trunk
+
 
 use_configure yes

@@ -1,18 +1,19 @@
 PortSystem      1.0
 PortGroup       gnustep 1.0
 
+fetch.type      svn
+svn.url         svn://svn.gna.org/svn/gnustep/libs/gui/trunk
+svn.revision    34196
+worksrcdir      trunk
+
 name            gnustep-gui-devel
-version         r${svn.revision}
+version         0.20.0-${svn.revision}
 categories      gnustep devel cross
 revision        1
 platforms       darwin
 # libs are LGPL, tools are GPL
 license         {LGPL GPL-3+}
 maintainers     nomaintainer
-
-fetch.type      svn
-svn.url         svn://svn.gna.org/svn/gnustep/libs/gui/trunk
-worksrcdir      trunk
 
 description     A library of graphical user interface Objective C classes
 long_description \

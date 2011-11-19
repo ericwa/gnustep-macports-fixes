@@ -1,8 +1,13 @@
 PortSystem  1.0
 PortGroup   gnustep 1.0
 
+fetch.type          svn
+svn.url             svn://svn.gna.org/svn/gnustep/libs/base/trunk
+svn.revision        34187
+worksrcdir          trunk
+
 name                gnustep-base-devel
-version             r${svn.revision}
+version             1.23.0-${svn.revision}
 categories          gnustep devel cross
 revision            1
 platforms           darwin
@@ -10,9 +15,7 @@ platforms           darwin
 license             {LGPL-3+ GPL-3+}
 maintainers         nomaintainer
 
-fetch.type          svn
-svn.url             svn://svn.gna.org/svn/gnustep/libs/base/trunk
-worksrcdir          trunk
+
 
 description         A library of general-purpose Objective C objects.
 long_description \

@@ -1,8 +1,13 @@
 PortSystem  1.0
 PortGroup   gnustep 1.0
 
+fetch.type      svn
+svn.url         svn://svn.gna.org/svn/gnustep/apps/gorm/trunk
+svn.revision    34196
+worksrcdir      trunk
+
 name        gorm
-version     1.2.12-svn
+version     1.2.12-${svn.revision}
 platforms   darwin
 maintainers nomaintainer
 
@@ -10,9 +15,5 @@ description  Graphical Object Relationship Modeller
 long_description \
     Gorm stands for "Graphical Object Relationship Modeller" \
     and is GNUstep's easy-to-use interface designer.
-
-fetch.type      svn
-svn.url         svn://svn.gna.org/svn/gnustep/apps/gorm/trunk
-worksrcdir      trunk
 
 depends_lib     port:gnustep-core

@@ -33,6 +33,10 @@ platform darwin 11 { # 10.7
     configure.compiler      clang
 }
 
+# On a normal GNUstep installation, GNUstep.sh would be sourced before running
+# configure. In our port, GNUstep.sh is only sourced when running 'make'
+# (see pre-build rule), not configure. To compensate, we set 
+# the GNUSTEP_MAKEFILES variable which allows configure to work properly
 configure.env-append GNUSTEP_MAKEFILES=${prefix}/GNUstep/System/Library/Makefiles
 
 # defaults to: --prefix=${prefix}

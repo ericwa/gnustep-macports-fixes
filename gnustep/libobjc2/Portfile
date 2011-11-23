@@ -14,6 +14,20 @@ platforms           darwin
 license             MIT
 maintainers         nomaintainer
 
+# rationale for using clang:
+# The default CC on 10.6/Xcode3 (gcc 4.2) seems to work, but
+# the default CC on 10.6/Xcode4 (llvm-gcc 4.2) doesn't seem to support weak symbols.
+#
+depends_lib         port:clang
+build.args-append   CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++
+
+platform darwin 11 { # 10.7
+    # use the system provided clang compiler.
+    depends_build-delete    port:clang
+    build.args-delete   CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++
+    build.args-append   CC=clang CXX=clang++
+}
+
 description         The GNUstep Objective-C runtime
 long_description \
     The GNUstep Objective-C runtime is designed as a drop-in replacement for the \
@@ -45,3 +59,8 @@ use_configure       no
 
 patchfiles-append   patch-macosx.diff
 destroot.args	    PREFIX=${destroot}${prefix}
+
+# We don't want to use the GNUstep-make makefile under any circumstances.
+pre-build {
+    delete ${worksrcpath}/GNUmakefile
+}

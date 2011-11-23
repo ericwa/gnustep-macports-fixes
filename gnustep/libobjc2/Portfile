@@ -23,7 +23,7 @@ build.args-append   CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++
 
 platform darwin 11 { # 10.7
     # use the system provided clang compiler.
-    depends_build-delete    port:clang
+    depends_lib-delete    port:clang
     build.args-delete   CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++
     build.args-append   CC=clang CXX=clang++
 }

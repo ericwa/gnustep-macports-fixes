@@ -57,7 +57,8 @@ long_description \
 universal_variant   no
 use_configure       no
 
-patchfiles-append   patch-macosx.diff
+patchfiles-append   patch-macosx.diff \
+                    patch-mode_t-fix.diff
 destroot.args	    PREFIX=${destroot}${prefix}
 
 # We don't want to use the GNUstep-make makefile under any circumstances.

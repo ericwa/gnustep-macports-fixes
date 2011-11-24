@@ -34,7 +34,7 @@ configure.objc          ${prefix}/bin/clang-mp-3.0
 platform darwin 11 { # 10.7
     # use the system provided clang compiler.
     # note that the system llvm-gcc-4.2 won't work because -fconstant-string-class is broken on that compiler
-    depends_build-delete    port:clang
+    depends_build-delete    port:clang-3.0
     configure.compiler      clang
 }
 

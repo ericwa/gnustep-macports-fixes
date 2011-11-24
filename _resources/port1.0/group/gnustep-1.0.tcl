@@ -35,6 +35,10 @@ platform darwin 11 { # 10.7
     # use the system provided clang compiler.
     # note that the system llvm-gcc-4.2 won't work because -fconstant-string-class is broken on that compiler
     depends_build-delete    port:clang-3.0
+    configure.cc-delete     ${prefix}/bin/clang-mp-3.0
+    configure.cpp-delete    ${prefix}/bin/clang-mp-3.0
+    configure.cxx-delete    ${prefix}/bin/clang++-mp-3.0
+    configure.objc-delete   ${prefix}/bin/clang-mp-3.0
     configure.compiler      clang
 }
 

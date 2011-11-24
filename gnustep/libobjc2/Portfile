@@ -18,13 +18,13 @@ maintainers         nomaintainer
 # The default CC on 10.6/Xcode3 (gcc 4.2) seems to work, but
 # the default CC on 10.6/Xcode4 (llvm-gcc 4.2) doesn't seem to support weak symbols.
 #
-depends_lib         port:clang
-build.args-append   CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++
+depends_lib         port:clang-3.0
+build.args-append   CC=${prefix}/bin/clang-mp-3.0 CXX=${prefix}/bin/clang++-mp-3.0
 
 platform darwin 11 { # 10.7
     # use the system provided clang compiler.
-    depends_lib-delete    port:clang
-    build.args-delete   CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++
+    depends_lib-delete    port:clang-3.0
+    build.args-delete   CC=${prefix}/bin/clang-mp-3.0 CXX=${prefix}/bin/clang++-mp-3.0
     build.args-append   CC=clang CXX=clang++
 }
 

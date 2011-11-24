@@ -23,8 +23,13 @@ use_configure       no
 
 # for platform <= 10.6
 # system provided clang 1.6 doesn't work
-configure.compiler      macports-clang
-depends_build-append    port:clang
+depends_build-append    port:clang-3.0
+# FIXME: We should set configure.compiler instead of the following, but macports doesn't support
+# a configure.compiler setting of clang-3.0
+configure.cc            ${prefix}/bin/clang-mp-3.0
+configure.cpp           ${prefix}/bin/clang-mp-3.0
+configure.cxx           ${prefix}/bin/clang++-mp-3.0
+configure.objc          ${prefix}/bin/clang-mp-3.0
 
 platform darwin 11 { # 10.7
     # use the system provided clang compiler.

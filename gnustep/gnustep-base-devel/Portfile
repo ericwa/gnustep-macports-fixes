@@ -3,7 +3,7 @@ PortGroup   gnustep 1.0
 
 fetch.type          svn
 svn.url             svn://svn.gna.org/svn/gnustep/libs/base/trunk
-svn.revision        34187
+svn.revision        34251
 worksrcdir          trunk
 
 name                gnustep-base-devel
@@ -40,7 +40,8 @@ use_configure       yes
 test.run            yes
 test.target         check
 
-configure.args-append   --disable-tls
+configure.args-append   --disable-tls \
+                        --disable-unicodeconstants
 
 # use_autoreconf to regenerate configure because the patch updates configure.ac
 patchfiles-append  patch-configure.diff \

@@ -3,7 +3,7 @@ PortGroup       gnustep 1.0
 
 fetch.type      svn
 svn.url         svn://svn.gna.org/svn/gnustep/libs/gui/trunk
-svn.revision    34196
+svn.revision    34922
 worksrcdir      trunk
 
 name            gnustep-gui-devel

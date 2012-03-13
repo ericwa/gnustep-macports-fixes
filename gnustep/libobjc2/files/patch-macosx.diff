@@ -50,7 +50,7 @@ Index: Makefile
  $(LIBOBJC).a: $(OBJECTS)
  	$(SILENT)echo Linking static Objective-C runtime library...
 -	$(SILENT)ld -r -s -o $@ $(OBJECTS)
-+	$(SILENT)ld $(LDFLAGS) -r -s -install_name $(LIBRARY_PATH)/$@ -o $@ $(OBJECTS)
++	$(SILENT)libtool -static $(OBJECTS) -o $@ 
  
  .cc.o: Makefile
  	$(SILENT)echo Compiling `basename $<`...
@@ -99,5 +99,5 @@ Index: objc_msgSend.S
  #warning objc_msgSend() not implemented for your architecture
  #endif
 +#else
-+#watning objc_msgSend() not implement on Mac OS X
++#warning objc_msgSend() not implement on Mac OS X
 +#endif

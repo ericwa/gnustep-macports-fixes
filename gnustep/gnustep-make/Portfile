@@ -2,7 +2,7 @@ PortSystem 1.0
 PortGroup  gnustep 1.0
 
 name            gnustep-make
-version         2.6.1
+version         2.6.2
 categories      gnustep devel cross
 platforms       darwin
 license         GPL-3+
@@ -20,9 +20,8 @@ long_description \
 
 depends_lib         port:libobjc2
 
-checksums           rmd160  a72970e1bf0fa93622981e991717714795cdb7a5 \
-                    sha256  c48b0a4c85eee4799b12cceeb327c470b168100cbcda4f111b1edad71f8762eb
-
+checksums           rmd160  683b6a034d4bb7e17b64209c7e7e289e9e94a042 \
+                    sha256  7a95b3fc5bf14f6b06c4f1f716b48e9de13a11c1fa972aa3cc87736cd98f3e3a
 
 # we can not use the fhs layout, because that uses /opt/local/lib as the GNUstep system library
 # directory, and gnustep-make adds the system library directory to DYLD_LIBRARY_PATH when 

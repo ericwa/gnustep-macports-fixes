@@ -38,12 +38,12 @@ Index: Makefile
  CFLAGS += -std=gnu99 -fPIC -fexceptions
  CXXFLAGS += -fPIC -fexceptions
  CPPFLAGS += -DTYPE_DEPENDENT_DISPATCH -DGNUSTEP
-@@ -64,19 +66,19 @@
+@@ -64,20 +66,16 @@
  	statics_loader.o\
  	toydispatch.o
  
 -all: $(LIBOBJC).a $(LIBOBJCXX).so.$(VERSION)
-+all: $(LIBOBJC).a $(LIBOBJCXX).$(SHARED_LIB_SUFFIX)
++all: $(LIBOBJCXX).$(SHARED_LIB_SUFFIX)
  
 -$(LIBOBJCXX).so.$(VERSION): $(LIBOBJC).so.$(VERSION) $(OBJCXX_OBJECTS)
 +$(LIBOBJCXX).$(SHARED_LIB_SUFFIX): $(LIBOBJC).$(SHARED_LIB_SUFFIX) $(OBJCXX_OBJECTS)
@@ -57,14 +57,14 @@ Index: Makefile
 -	$(SILENT)$(CC) -shared -rdynamic -o $@ $(OBJECTS)
 +	$(SILENT)libtool -dynamic -o $@ -install_name $(LIBRARY_PATH)/$@ -current_version $(VERSION) -undefined dynamic_lookup $(OBJECTS)
  
- $(LIBOBJC).a: $(OBJECTS)
- 	$(SILENT)echo Linking static Objective-C runtime library...
+-$(LIBOBJC).a: $(OBJECTS)
+-	$(SILENT)echo Linking static Objective-C runtime library...
 -	$(SILENT)ld -r -s -o $@ $(OBJECTS)
-+	$(SILENT)libtool -static -o $@ $(OBJECTS)
- 
+-
  .cc.o: Makefile
  	$(SILENT)echo Compiling `basename $<`...
-@@ -88,7 +90,7 @@
+ 	$(SILENT)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+@@ -88,7 +86,7 @@
  
  .m.o: Makefile
  	$(SILENT)echo Compiling `basename $<`...
@@ -73,22 +73,22 @@ Index: Makefile
  
  .S.o: Makefile
  	$(SILENT)echo Assembling `basename $<`...
-@@ -97,22 +99,15 @@
+@@ -97,22 +95,13 @@
  install: all
  	$(SILENT)echo Installing libraries...
  	$(SILENT)install -d $(LIB_DIR)
 -	$(SILENT)install -m 444 $(LIBOBJC).so.$(VERSION) $(LIB_DIR)
 -	$(SILENT)install -m 444 $(LIBOBJCXX).so.$(VERSION) $(LIB_DIR)
+-	$(SILENT)install -m 444 $(LIBOBJC).a $(LIB_DIR)
 +	$(SILENT)install -m 444 $(LIBOBJC).$(SHARED_LIB_SUFFIX) $(LIB_DIR)
 +	$(SILENT)install -m 444 $(LIBOBJCXX).$(SHARED_LIB_SUFFIX) $(LIB_DIR)
- 	$(SILENT)install -m 444 $(LIBOBJC).a $(LIB_DIR)
  	$(SILENT)if [ "$(strip)" = "yes" ]; then \
  		echo Stripping installed libraries...; \
 -		strip $(LIB_DIR)/$(LIBOBJC).so.$(VERSION); \
 -		strip $(LIB_DIR)/$(LIBOBJCXX).so.$(VERSION); \
+-		strip $(LIB_DIR)/$(LIBOBJC).a; \
 +		strip $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX); \
 +		strip $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX); \
- 		strip $(LIB_DIR)/$(LIBOBJC).a; \
  	fi
 -	$(SILENT)echo Creating symbolic links...
 -	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJC).so.$(VERSION) $(LIB_DIR)/$(LIBOBJC).so
@@ -100,15 +100,15 @@ Index: Makefile
  	$(SILENT)echo Installing headers...
  	$(SILENT)install -d $(HEADER_DIR)/objc
  	$(SILENT)install -m 444 objc/*.h $(HEADER_DIR)/objc
-@@ -121,6 +116,6 @@
+@@ -121,6 +110,5 @@
  	$(SILENT)echo Cleaning...
  	$(SILENT)rm -f $(OBJECTS)
  	$(SILENT)rm -f $(OBJCXX_OBJECTS)
 -	$(SILENT)rm -f $(LIBOBJC).so.$(VERSION)
 -	$(SILENT)rm -f $(LIBOBJCXX).so.$(VERSION)
+-	$(SILENT)rm -f $(LIBOBJC).a
 +	$(SILENT)rm -f $(LIBOBJC).$(SHARED_LIB_SUFFIX)
 +	$(SILENT)rm -f $(LIBOBJCXX).$(SHARED_LIB_SUFFIX)
- 	$(SILENT)rm -f $(LIBOBJC).a
 Index: block_to_imp.c
 ===================================================================
 --- block_to_imp.c	(revision 34927)

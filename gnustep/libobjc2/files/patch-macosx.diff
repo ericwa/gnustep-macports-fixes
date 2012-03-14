@@ -43,16 +43,16 @@ Index: Makefile
  	toydispatch.o
  
 -all: $(LIBOBJC).a $(LIBOBJCXX).so.$(VERSION)
-+all: $(LIBOBJC).a $(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(VERSION)
++all: $(LIBOBJC).a $(LIBOBJCXX).$(SHARED_LIB_SUFFIX)
  
 -$(LIBOBJCXX).so.$(VERSION): $(LIBOBJC).so.$(VERSION) $(OBJCXX_OBJECTS)
-+$(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(VERSION): $(LIBOBJC).$(SHARED_LIB_SUFFIX).$(VERSION) $(OBJCXX_OBJECTS)
++$(LIBOBJCXX).$(SHARED_LIB_SUFFIX): $(LIBOBJC).$(SHARED_LIB_SUFFIX) $(OBJCXX_OBJECTS)
  	$(SILENT)echo Linking shared Objective-C++ runtime library...
 -	$(SILENT)$(CXX) -shared -o $@ $(OBJCXX_OBJECTS)
 +	$(SILENT)libtool -dynamic -o $@ -install_name $(LIBRARY_PATH)/$@ -current_version $(VERSION) -undefined dynamic_lookup $(OBJCXX_OBJECTS)
  
 -$(LIBOBJC).so.$(VERSION): $(OBJECTS)
-+$(LIBOBJC).$(SHARED_LIB_SUFFIX).$(VERSION): $(OBJECTS)
++$(LIBOBJC).$(SHARED_LIB_SUFFIX): $(OBJECTS)
  	$(SILENT)echo Linking shared Objective-C runtime library...
 -	$(SILENT)$(CC) -shared -rdynamic -o $@ $(OBJECTS)
 +	$(SILENT)libtool -dynamic -o $@ -install_name $(LIBRARY_PATH)/$@ -current_version $(VERSION) -undefined dynamic_lookup $(OBJECTS)
@@ -73,47 +73,41 @@ Index: Makefile
  
  .S.o: Makefile
  	$(SILENT)echo Assembling `basename $<`...
-@@ -97,22 +99,22 @@
+@@ -97,22 +99,15 @@
  install: all
  	$(SILENT)echo Installing libraries...
  	$(SILENT)install -d $(LIB_DIR)
 -	$(SILENT)install -m 444 $(LIBOBJC).so.$(VERSION) $(LIB_DIR)
 -	$(SILENT)install -m 444 $(LIBOBJCXX).so.$(VERSION) $(LIB_DIR)
-+	$(SILENT)install -m 444 $(LIBOBJC).$(SHARED_LIB_SUFFIX).$(VERSION) $(LIB_DIR)
-+	$(SILENT)install -m 444 $(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(VERSION) $(LIB_DIR)
++	$(SILENT)install -m 444 $(LIBOBJC).$(SHARED_LIB_SUFFIX) $(LIB_DIR)
++	$(SILENT)install -m 444 $(LIBOBJCXX).$(SHARED_LIB_SUFFIX) $(LIB_DIR)
  	$(SILENT)install -m 444 $(LIBOBJC).a $(LIB_DIR)
  	$(SILENT)if [ "$(strip)" = "yes" ]; then \
  		echo Stripping installed libraries...; \
 -		strip $(LIB_DIR)/$(LIBOBJC).so.$(VERSION); \
 -		strip $(LIB_DIR)/$(LIBOBJCXX).so.$(VERSION); \
-+		strip $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX).$(VERSION); \
-+		strip $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(VERSION); \
++		strip $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX); \
++		strip $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX); \
  		strip $(LIB_DIR)/$(LIBOBJC).a; \
  	fi
- 	$(SILENT)echo Creating symbolic links...
+-	$(SILENT)echo Creating symbolic links...
 -	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJC).so.$(VERSION) $(LIB_DIR)/$(LIBOBJC).so
 -	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJC).so.$(VERSION) $(LIB_DIR)/$(LIBOBJC).so.$(MAJOR_VERSION)
 -	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJC).so.$(VERSION) $(LIB_DIR)/$(LIBOBJC).so.$(MAJOR_VERSION).$(MINOR_VERSION)
 -	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJCXX).so.$(VERSION) $(LIB_DIR)/$(LIBOBJCXX).so
 -	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJCXX).so.$(VERSION) $(LIB_DIR)/$(LIBOBJCXX).so.$(MAJOR_VERSION)
 -	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJCXX).so.$(VERSION) $(LIB_DIR)/$(LIBOBJCXX).so.$(MAJOR_VERSION).$(MINOR_VERSION)
-+	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX).$(VERSION) $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX)
-+	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX).$(VERSION) $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX).$(MAJOR_VERSION)
-+	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX).$(VERSION) $(LIB_DIR)/$(LIBOBJC).$(SHARED_LIB_SUFFIX).$(MAJOR_VERSION).$(MINOR_VERSION)
-+	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(VERSION) $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX)
-+	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(VERSION) $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(MAJOR_VERSION)
-+	$(SILENT)ln -sf $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(VERSION) $(LIB_DIR)/$(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(MAJOR_VERSION).$(MINOR_VERSION)
  	$(SILENT)echo Installing headers...
  	$(SILENT)install -d $(HEADER_DIR)/objc
  	$(SILENT)install -m 444 objc/*.h $(HEADER_DIR)/objc
-@@ -121,6 +123,6 @@
+@@ -121,6 +116,6 @@
  	$(SILENT)echo Cleaning...
  	$(SILENT)rm -f $(OBJECTS)
  	$(SILENT)rm -f $(OBJCXX_OBJECTS)
 -	$(SILENT)rm -f $(LIBOBJC).so.$(VERSION)
 -	$(SILENT)rm -f $(LIBOBJCXX).so.$(VERSION)
-+	$(SILENT)rm -f $(LIBOBJC).$(SHARED_LIB_SUFFIX).$(VERSION)
-+	$(SILENT)rm -f $(LIBOBJCXX).$(SHARED_LIB_SUFFIX).$(VERSION)
++	$(SILENT)rm -f $(LIBOBJC).$(SHARED_LIB_SUFFIX)
++	$(SILENT)rm -f $(LIBOBJCXX).$(SHARED_LIB_SUFFIX)
  	$(SILENT)rm -f $(LIBOBJC).a
 Index: block_to_imp.c
 ===================================================================

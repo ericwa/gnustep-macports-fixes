@@ -35,9 +35,10 @@ long_description \
 depends_lib     port:gnustep-gui-devel \
                 port:xorg-libXt \
                 port:xorg-libXext \
-                port:Xft2
+                port:Xft2 \
+                port:cairo
 
 use_configure   yes
 
 configure.args  --disable-glx \
-                --enable-graphics=xlib
+                --enable-graphics=cairo

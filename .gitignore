@@ -2,3 +2,4 @@
 PortIndex
 PortIndex.quick
 *.Portfile.swo
+gnustep/*/work

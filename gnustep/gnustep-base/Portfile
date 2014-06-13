@@ -34,3 +34,12 @@ pre-fetch {
     ui_error "gnustep-base is currrently broken, use gnustep-base-devel"
     return -code error "broken port"
 }
+
+universal_variant   no
+
+configure.env-append    LIBOBJC=-lobjc-gnu
+configure.args-append   --disable-tls
+
+destroot.keepdirs   ${destroot}${prefix}/var/run
+
+#FIXME: livecheck errors out with a 404

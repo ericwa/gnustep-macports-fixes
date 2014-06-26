@@ -28,3 +28,5 @@ if {[info exists gnustep.post_flags]} {
         .   "-lobjc -lgnustep-base -lgnustep-gui"
     }
 }
+
+#FIXME: livecheck errors out with a 404

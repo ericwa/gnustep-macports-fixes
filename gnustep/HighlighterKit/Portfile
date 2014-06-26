@@ -1,22 +1,35 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id: Portfile 97215 2012-08-30 15:30:19Z jmr@macports.org $
 
-PortSystem  1.0
-PortGroup   gnustep 1.0
+PortSystem          1.0
+PortGroup           gnustep 1.0
 
-name        HighlighterKit
-version     0.1
-license     GPL-2+
-maintainers nomaintainer
-platforms   darwin
-homepage    http://home.gna.org/pmanager
+name                HighlighterKit
+version             0.1
+license             GPL-2+
+maintainers         nomaintainer
+platforms           darwin
+homepage            http://home.gna.org/pmanager
 
-description Syntax highlighting framework
+description         Syntax highlighting framework
 long_description \
     HighlighterKit is a framework to allow easy incorporation \
     of syntax highlighting features into your application.
 
-master_sites    http://download.gna.org/pmanager/0.2/
-checksums       md5 ad0fb97126da238cbfdb1a7eb0a5f7e4
+master_sites        http://download.gna.org/pmanager/0.2/
+checksums           md5     ad0fb97126da238cbfdb1a7eb0a5f7e4 \
+                    sha1    819e7e7567596e82a090b9585da79c0cd75755d5 \
+                    rmd160  086d1200e212f73122865aff92382a99317c1557
 
-depends_lib     port:gnustep-gui
+
+depends_lib-append  lib:objc:libobjc2 \
+                    port:gnustep-base \
+                    port:gnustep-gui
+
+if {[info exists gnustep.post_flags]} {
+    array set gnustep.post_flags {
+        .   "-lobjc -lgnustep-base -lgnustep-gui"
+    }
+}
+
+#FIXME: livecheck errors out with a 404

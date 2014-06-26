@@ -32,10 +32,12 @@ worksrcdir          ${name}
 patchfiles          patch-etoile.make.diff \
                     patch-PopplerKit-config.sh.diff
 
-array set gnustep.post_flags {
-    Frameworks/AddressesKit/Frameworks/AddressView  -lAddresses
-    Frameworks/BookmarkKit                          -lCollectionKit
-    Frameworks/SystemConfig                         -lX11
+if {[info exists gnustep.post_flags]} {
+    array set gnustep.post_flags {
+        Frameworks/AddressesKit/Frameworks/AddressView  -lAddresses
+        Frameworks/BookmarkKit                          -lCollectionKit
+        Frameworks/SystemConfig                         -lX11
+    }
 }
 
 post-patch {

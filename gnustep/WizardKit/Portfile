@@ -1,22 +1,30 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id: Portfile 97212 2012-08-30 15:05:58Z jmr@macports.org $
 
-PortSystem  1.0
-PortGroup   gnustep 1.0
+PortSystem          1.0
+PortGroup           gnustep 1.0
 
-name        WizardKit
-version     0.1
-platforms   darwin
-license     GPL-2+
-maintainers nomaintainer
-homepage    http://home.gna.org/pmanager
+name                WizardKit
+version             0.1
+platforms           darwin
+license             GPL-2+
+maintainers         nomaintainer
+homepage            http://home.gna.org/pmanager
 
-description Wizard-style setup framework
+description         Wizard-style setup framework
 long_description \
     WizardKit is a framework to allow easy construction \
     of wizard-style setup and navigation panels.
 
-master_sites    http://download.gna.org/pmanager/0.2/
-checksums       md5 ac6611f38ffe7d3b361c314d22b9951f
+master_sites        http://download.gna.org/pmanager/0.2/
+checksums           md5     ac6611f38ffe7d3b361c314d22b9951f \
+                    sha1    62bbd8524565480d14543cd805b04373d4780a59 \
+                    rmd160  644723a66f322bee8aba0df2e3d04d8a77921122
 
-depends_lib     port:gnustep-gui
+depends_lib-append  port:gnustep-gui
+
+if {[info exists gnustep.post_flags]} {
+    array set gnustep.post_flags {
+        .   "-lobjc -lgnustep-base -lgnustep-gui"
+    }
+}

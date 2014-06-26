@@ -5,7 +5,7 @@ PortSystem          1.0
 
 name                gnustep-make-docs
 version             1.13.0
-revision            2
+revision            3
 categories          gnustep devel
 license             GPL-2+
 description         GNUstep makefile documentation
@@ -48,6 +48,7 @@ destroot.destdir \
 destroot {
     set gnustep_syslibdir ${prefix}/GNUstep/System/Library
     set gnustep_destsysdocdir ${destroot}${gnustep_syslibdir}/Documentation
+    set gs_destsysmandir ${gnustep_destsysdocdir}/man
     set gs_destsysuserdocdir ${gnustep_destsysdocdir}/User/GNUstep
     set gs_destsysdevdocdir ${gnustep_destsysdocdir}/Developer/Make/Manual
     system -W ${worksrcpath} ". ${gnustep_syslibdir}/Makefiles/GNUstep.sh \
@@ -59,6 +60,10 @@ destroot {
     }
     ui_debug "copying ${worksrcpath}/make to ${gs_destsysdevdocdir}"
     file copy ${worksrcpath}/make ${gs_destsysdevdocdir}
+    # prevent conflict with gnustep-make:
+    ui_debug "renaming manpages"
+    file rename ${gs_destsysmandir}/man1/openapp.1.gz ${gs_destsysmandir}/man1/openapp-gsmakedocs.1.gz
+    file rename ${gs_destsysmandir}/man7/GNUstep.7.gz ${gs_destsysmandir}/man7/GNUstep-gsmakedocs.7.gz
 }
 
 destroot.violate_mtree yes

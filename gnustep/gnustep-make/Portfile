@@ -72,3 +72,5 @@ platform darwin {
             ${worksrcpath}/FilesystemLayouts/fhs
     }
 }
+
+#FIXME: livecheck errors out with a 404

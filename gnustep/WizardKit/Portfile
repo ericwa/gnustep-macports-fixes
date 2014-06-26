@@ -21,7 +21,9 @@ checksums           md5     ac6611f38ffe7d3b361c314d22b9951f \
                     sha1    62bbd8524565480d14543cd805b04373d4780a59 \
                     rmd160  644723a66f322bee8aba0df2e3d04d8a77921122
 
-depends_lib-append  port:gnustep-gui
+depends_lib-append  lib:objc:libobjc2 \
+                    port:gnustep-base \
+                    port:gnustep-gui
 
 if {[info exists gnustep.post_flags]} {
     array set gnustep.post_flags {

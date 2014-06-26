@@ -28,8 +28,8 @@ depends_lib         port:SQLClient \
 
 worksrcdir          ${name}
 
-patchfiles          patch-etoile.make \
-                    patch-PopplerKit-config.sh
+patchfiles          patch-etoile.make.diff \
+                    patch-PopplerKit-config.sh.diff
 
 array set gnustep.post_flags {
     Frameworks/AddressesKit/Frameworks/AddressView  -lAddresses

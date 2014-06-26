@@ -7,6 +7,7 @@ name            Etoile-devel
 version         0.1.9
 revision        6
 platforms       darwin
+license         GPL-2+ LGPL BSD
 maintainers     nomaintainer
 homepage        http://www.etoile-project.org/
 
@@ -33,9 +34,9 @@ depends_lib         port:SQLClient \
 
 worksrcdir          Etoile
 
-patchfiles          patch-etoile.make \
-                    patch-PopplerKit-config.sh \
-                    patch-xmpp-GNUmakefile
+patchfiles          patch-etoile.make.diff \
+                    patch-PopplerKit-config.sh.diff \
+                    patch-xmpp-GNUmakefile.diff
 
 array set gnustep.post_flags {
     Frameworks/AddressesKit/Frameworks/AddressView  -lAddresses

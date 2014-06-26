@@ -1,7 +1,8 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id: Portfile 99247 2012-10-30 10:41:29Z g5pw@macports.org $
 
-PortSystem  1.0
-PortGroup   gnustep 1.0
+PortSystem      1.0
+PortGroup       gnustep 1.0
 
 name            Etoile-devel
 version         0.1.9
@@ -27,7 +28,7 @@ svn.url         http://svn.gna.org/svn/etoile/trunk/Etoile
 #}
 ########################################################################
 
-depends_lib         port:SQLClient \
+depends_lib-append  port:SQLClient \
                     path:bin/dbus-daemon:dbus \
                     port:oniguruma5 \
                     port:poppler
@@ -51,7 +52,7 @@ post-patch {
         ${worksrcpath}/Services/Private/System/GNUmakefile
 }
 
-# We do NOT build corner because StepTalk is not available yet in MP
+# We do NOT build corner because StepTalk is not available yet in MacPorts:
 build.args      corner=no debug=yes
 destroot.args   corner=no debug=yes
 
@@ -66,9 +67,9 @@ post-destroot {
         ${destroot}${prefix}/share/xsessions
 
     set chan [open ${destroot}${prefix}/bin/etoile w]
-	puts $chan ". ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh; etoile_system"
-	close $chan
-	file attributes ${destroot}${prefix}/bin/etoile -permissions 0755
+    puts ${chan} ". ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh; etoile_system"
+    close ${chan}
+    file attributes ${destroot}${prefix}/bin/etoile -permissions 0755
 
     xinstall -d ${destroot}${prefix}/GNUstep/Local/Library/Themes
     copy ${worksrcpath}/Bundles/Camaelon/Nesedah.theme \

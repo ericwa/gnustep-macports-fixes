@@ -1,27 +1,28 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id: Portfile 112919 2013-11-04 03:51:43Z jmr@macports.org $
 
 PortSystem  1.0
 
-name            	gnustep-make-docs
-version         	1.13.0
-revision			1
+name                gnustep-make-docs
+version             1.13.0
+revision            1
 categories          gnustep devel
-license         	GPL-2+
-description     	GNUstep makefile documentation
-long_description	${description}
-platforms       	darwin
-maintainers     	nomaintainer
-homepage			http://www.gnustep.org/
+license             GPL-2+
+description         GNUstep makefile documentation
+long_description    ${description}
+platforms           darwin
+maintainers         nomaintainer
+homepage            http://www.gnustep.org/
 
 depends_build       port:gnustep-make \
                     bin:latex2html:latex2html \
-		    bin:texi2pdf:texinfo \
+            bin:texi2pdf:texinfo \
                     bin:texi2html:texi2html \
                     bin:pdftex:texlive
  
-master_sites		gnustep:core
+master_sites        gnustep:core
  
-checksums			md5 1d7a434e751c58c6390055c14ada302b
+checksums           md5 1d7a434e751c58c6390055c14ada302b
 distname            gnustep-make-${version}
 worksrcdir          ${distname}/Documentation
 
@@ -46,9 +47,9 @@ destroot {
         ${destroot.cmd} ${destroot.target} \
             ${destroot.args} ${destroot.destdir}"
     foreach i { faq filesystem gnustep-howto machines userfaq } {
-    	file copy ${worksrcpath}/$i \
-    		${destroot}${prefix}/GNUstep/System/Library/Documentation/User/GNUstep
+        file copy ${worksrcpath}/$i \
+            ${destroot}${prefix}/GNUstep/System/Library/Documentation/User/GNUstep
     }
     file copy ${worksrcpath}/make \
-    		${destroot}${prefix}/GNUstep/System/Library/Documentation/Developer/Make/Manual
+            ${destroot}${prefix}/GNUstep/System/Library/Documentation/Developer/Make/Manual
 }

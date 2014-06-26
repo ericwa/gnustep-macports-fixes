@@ -1,4 +1,4 @@
-# $Id: Portfile 40563 2008-10-06 21:32:55Z jmr@macports.org $
+# $Id: Portfile 112919 2013-11-04 03:51:43Z jmr@macports.org $
 
 PortSystem  1.0
 
@@ -6,6 +6,7 @@ name            	gnustep-make-docs
 version         	1.13.0
 revision			1
 categories          gnustep devel
+license         	GPL-2+
 description     	GNUstep makefile documentation
 long_description	${description}
 platforms       	darwin

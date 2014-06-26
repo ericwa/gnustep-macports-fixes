@@ -1,3 +1,5 @@
+# $Id: Portfile 108870 2013-08-04 06:18:37Z jeremyhu@macports.org $
+
 PortSystem 1.0
 PortGroup  gnustep 1.0
 
@@ -10,6 +12,7 @@ maintainers     nomaintainer
 supported_archs noarch
 installs_libs   no
 
+homepage        http://www.gnustep.org/
 description     GNUstep makefile package
 long_description \
     The GNUstep makefile package is a simple, powerful and extensible way to \
@@ -20,9 +23,14 @@ long_description \
 
 depends_lib         port:libobjc2
 
+master_sites        gnustep:core
+
 checksums           rmd160  a72970e1bf0fa93622981e991717714795cdb7a5 \
                     sha256  c48b0a4c85eee4799b12cceeb327c470b168100cbcda4f111b1edad71f8762eb
 
+destroot.violate_mtree yes
+
+compiler.blacklist  gcc-4.0
 
 # we can not use the fhs layout, because that uses /opt/local/lib as the GNUstep system library
 # directory, and gnustep-make adds the system library directory to DYLD_LIBRARY_PATH when 
@@ -30,17 +38,35 @@ checksums           rmd160  a72970e1bf0fa93622981e991717714795cdb7a5 \
 # having /opt/local/lib in DYLD_LIBRARY_PATH can mess up macports. e.g. pkg-config 
 # will stop working because it loads the macports libjpeg when it should load the system
 # libjpeg.
-configure.args      --with-library-combo=gnu-gnu-gnu \
+configure.pre_args  --prefix=${prefix}/GNUstep
+configure.args      CC=${configure.cc} \
+                    --with-library-combo=gnu-gnu-gnu \
                     --with-objc-lib-flag=-lobjc-gnu \
                     --with-layout=gnustep \
                     --with-config-file=${prefix}/GNUstep/GNUstep.conf \
                     --enable-debug-by-default
+
 use_configure       yes
 
-notes               "\
+destroot.args       messages=yes
+
+destroot.keepdirs   ${destroot}${prefix}/GNUstep/Local
+
+notes "\
 ##########################################################
 To have a fully working GNUstep make system, please add
-'. ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh'
+'. ${prefix}/GNUstep/share/GNUstep/Makefiles/GNUstep.sh'
 to your shell login (in ~/.profile)
+
+You may also want to set up your MANPATH :
+export MANPATH=\$GNUSTEP_LOCAL_ROOT/Library/Documentation/man:\$GNUSTEP_SYSTEM_ROOT/Library/Documentation/man:${prefix}/share/man:/usr/share/man
 ##########################################################
 "
+
+platform darwin {
+    post-patch {
+        reinplace "s|/home|/Users|g" \
+            ${worksrcpath}/FilesystemLayouts/gnustep \
+            ${worksrcpath}/FilesystemLayouts/fhs
+    }
+}

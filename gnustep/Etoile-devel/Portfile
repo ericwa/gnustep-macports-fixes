@@ -51,7 +51,7 @@ post-patch {
         ${worksrcpath}/Services/Private/System/GNUmakefile
 }
 
-# We don't build corner because StepTalk is not available yet in MP
+# We do NOT build corner because StepTalk is not available yet in MP
 build.args      corner=no debug=yes
 destroot.args   corner=no debug=yes
 
@@ -85,3 +85,4 @@ post-destroot {
         ${destroot}${prefix}/GNUstep/Local/Library/Headers/AddressBook
 }
 
+#FIXME: livecheck errors out with a 404

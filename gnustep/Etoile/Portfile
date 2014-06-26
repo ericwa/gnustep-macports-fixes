@@ -44,10 +44,10 @@ post-patch {
         ${worksrcpath}/Services/Private/System/GNUmakefile
 }
 
-build.args      azalea=no background=no dock=no login=no corner=no idle=no azswitch=no \
-                jabber=no outerspace=no sketch=no
-destroot.args   azalea=no background=no dock=no login=no corner=no idle=no azswitch=no \
-                jabber=no outerspace=no sketch=no
+build.args      azalea=no background=no dock=no login=no corner=no \
+                idle=no azswitch=no jabber=no outerspace=no sketch=no
+destroot.args   azalea=no background=no dock=no login=no corner=no \
+                idle=no azswitch=no jabber=no outerspace=no sketch=no
 
 post-destroot {
     set localdir ${destroot}${prefix}/GNUstep/Local
@@ -60,3 +60,5 @@ post-destroot {
     delete ${localdir}/Library/Headers/AddressBook
     ln -s ${localdir}/Library/Headers/Addresses ${localdir}/Library/Headers/AddressBook
 }
+
+#FIXME: livecheck errors out with a 404

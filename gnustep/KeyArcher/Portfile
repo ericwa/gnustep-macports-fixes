@@ -1,21 +1,24 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id: Portfile 97214 2012-08-30 15:19:09Z jmr@macports.org $
 
-PortSystem  1.0
-PortGroup   gnustep 1.0
+PortSystem          1.0
+PortGroup           gnustep 1.0
 
-name        KeyArcher
-version     0.1
-platforms   darwin
-license     GPL-2+
-maintainers nomaintainer
-homepage    http://home.gna.org/pmanager
+name                KeyArcher
+version             0.1
+platforms           darwin
+license             GPL-2+
+maintainers         nomaintainer
+homepage            http://home.gna.org/pmanager
 
-description An interactive keyed-archive explorer.
-long_description \
-    ${description}
+description         An interactive keyed-archive explorer.
+long_description    ${description}
 
-master_sites    http://download.gna.org/pmanager/0.2/
-checksums       md5 f4ded05bf452e17ce932aecb72a220a6
+master_sites        http://download.gna.org/pmanager/0.2/
+checksums           md5     f4ded05bf452e17ce932aecb72a220a6 \
+                    sha1    261d47ea4a8211b6062087999d74caba5af23aca \
+                    rmd160  bf85d9c1f3127e95acc46d45006567afd3477c1f
 
-depends_lib     port:gnustep-core
+depends_lib-append  port:gnustep-core
+
+#FIXME: livecheck errors out with a 404

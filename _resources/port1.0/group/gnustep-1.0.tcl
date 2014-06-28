@@ -177,7 +177,7 @@ proc set_gnustep_env {} {
 }
 
 #
-# Options this group provides :
+# Options that this group provides:
 #
 
 options gnustep.cc
@@ -191,13 +191,15 @@ platform darwin 9 {
     configure.compiler      gcc-4.2
 }
 
+# For darwin 10+, use the gnustep 1.1 Port Group instead
+
 options system_library
 options local_library
 default system_library      [set_system_library]
 default local_library       [set_local_library]
 
 #
-# Default values for this group :
+# Default values for this group:
 #
 
 default categories          gnustep
@@ -219,7 +221,7 @@ default destroot.violate_mtree  yes
 destroot.pre_args-append    "messages=yes [set_gnustep_make]"
 
 #
-# To build and install documentation provided by the port
+# To build and install documentation provided by the port, use this variant:
 #
 
 variant with_docs {
@@ -230,11 +232,10 @@ variant with_docs {
                             port:gnustep-base
 
     post-destroot {
-
         if {[file exists ${worksrcpath}/Documentation/GNUmakefile]} {
-
             ui_msg "$UI_PREFIX Making documentation for ${name}"
 
+            #FIXME: use '-W' flag to the 'system' proc instead of '_cd':
             _cd ${worksrcpath}/Documentation
             system "${destroot.env} ${destroot.cmd} \
                     ${destroot.pre_args} ${destroot.destdir}"
@@ -250,4 +251,4 @@ variant with_docs {
     }
 }
 
-
+# EOF

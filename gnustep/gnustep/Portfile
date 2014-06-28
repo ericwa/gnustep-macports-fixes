@@ -17,11 +17,21 @@ long_description \
     This is the GNUstep Desktop and Applications suite. \
     Also provides a user-friendly environment configuration script.
 
-distfiles
+# clear, there is nothing to download:
+distfiles ""
+
+# this is the default for the gnustep PortGroup, but just in case:
 use_configure no
-build       { }
-destroot    { }
-post-install { }
+
+build {
+    ui_debug "${name} has no build step"
+}
+destroot {
+    ui_debug "${name} has no destroot step"
+}
+post-install {
+    ui_debug "${name} has no post-install step"
+}
 
 depends_lib-append \
     port:GMastermind \
@@ -38,3 +48,6 @@ variant dev_tools description {Add development-tools} {
         port:ProjectManager \
         port:Renaissance
 }
+
+# livecheck makes no sense here:
+livecheck.type none

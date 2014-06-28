@@ -32,7 +32,7 @@ depends_lib-append \
     port:gworkspace \
     port:windowmaker
 
-variant dev_tools {
+variant dev_tools description {Add development-tools} {
     depends_lib-append \
         port:ProjectManager \
         port:Renaissance

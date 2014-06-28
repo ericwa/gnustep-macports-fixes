@@ -23,7 +23,8 @@ master_sites  gnustep:libs freebsd
 checksums     md5 59ce3b8407cfdc6d25901e97e17c9cc5
 depends_lib   port:gorm
 
-patchfiles    patch-DefaultColumnProvider.h patch-DefaultColumnProvider.m
+patchfiles    patch-DefaultColumnProvider.h.diff \
+              patch-DefaultColumnProvider.m.diff
 post-patch {
     reinplace "s|db2control|db2control -lgnustep-gui|g" \
         ${worksrcpath}/EOModeler/Makefile.preamble

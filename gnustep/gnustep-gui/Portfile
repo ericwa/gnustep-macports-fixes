@@ -5,26 +5,32 @@ PortSystem      1.0
 PortGroup       gnustep 1.0
 
 name            gnustep-gui
+replaced_by     gnustep-gui-devel
 version         0.17.0
 revision        6
 platforms       darwin
-# libs are LGPL, tools are GPL
+# libs are LGPL, tools are GPL:
 license         {LGPL GPL-3+}
 maintainers     nomaintainer
 master_sites    gnustep:core
 
-description     A library of graphical user interface Objective C classes
+description     A library of graphical user interface Objective C classes.
 long_description \
-    The GNUstep gui library is a library of graphical user interface classes \
-    written completely in the Objective-C language. The classes are based \
-    upon the OpenStep specification as release by NeXT Software, Inc.  These \
-    classes include graphical objects such as buttons, text fields, popup \
-    lists, browser lists, and windows. There are also many associated \
-    classes for handling events, colors, fonts, pasteboards and images.
+    The GNUstep gui library is a library of graphical user interface \
+    classes written completely in the Objective-C language. \
+    The classes are based upon the OpenStep specification as released by \
+    NeXT Software, Inc. These classes include graphical objects such as \
+    buttons, text fields, popup lists, browser lists, and windows. \
+    There are also many associated classes for handling events, colors, \
+    fonts, pasteboards and images.
 
-distfiles
+# clear to prevent people from installing:
+distfiles ""
+depends_build
 
-pre-configure {
+pre-fetch {
     ui_error "gnustep-gui is currrently broken, use gnustep-gui-devel"
     return -code error "broken port"
 }
+
+#FIXME: livecheck errors out with a 404

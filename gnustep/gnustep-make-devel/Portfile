@@ -1,8 +1,9 @@
 PortSystem 1.0
-PortGroup  gnustep 1.0
+PortGroup  gnustep 1.1
 
 name            gnustep-make-devel
 version         r${svn.revision}
+revision        1
 categories      gnustep devel cross
 platforms       darwin
 license         GPL-3+

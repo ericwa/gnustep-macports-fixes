@@ -1,11 +1,11 @@
 # $Id: Portfile 84715 2011-09-30 09:54:17Z jmr@macports.org $
 
 PortSystem  1.0
-PortGroup   gnustep 1.0
+PortGroup   gnustep 1.1
 
 name        GMastermind
 version     0.5
-revision    1
+revision    2
 platforms   darwin
 license     GPL-2+
 maintainers nomaintainer

@@ -2,10 +2,11 @@
 # $Id: Portfile 94537 2012-06-22 02:36:43Z jmr@macports.org $
 
 PortSystem      1.0
-PortGroup       gnustep 1.0
+PortGroup       gnustep 1.1
 
 name            plconv
 version         0.1
+revision        1
 platforms       darwin
 license         GPL-2+
 maintainers     nomaintainer

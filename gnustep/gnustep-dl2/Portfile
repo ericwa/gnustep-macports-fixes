@@ -2,10 +2,11 @@
 # $Id: Portfile 112920 2013-11-04 04:01:38Z jmr@macports.org $
 
 PortSystem          1.0
-PortGroup           gnustep 1.0
+PortGroup           gnustep 1.1
 
 name                gnustep-dl2
 version             0.10.1
+revision            1
 platforms           darwin
 license             GPL-2+
 maintainers         nomaintainer

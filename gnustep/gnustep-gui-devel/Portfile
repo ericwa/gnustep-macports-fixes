@@ -1,5 +1,5 @@
 PortSystem      1.0
-PortGroup       gnustep 1.0
+PortGroup       gnustep 1.1
 
 fetch.type      svn
 svn.url         svn://svn.gna.org/svn/gnustep/libs/gui/trunk
@@ -9,7 +9,7 @@ worksrcdir      trunk
 name            gnustep-gui-devel
 version         0.20.0-${svn.revision}
 categories      gnustep devel cross
-revision        1
+revision        2
 platforms       darwin
 # libs are LGPL, tools are GPL
 license         {LGPL GPL-3+}

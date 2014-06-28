@@ -1,8 +1,9 @@
 PortSystem  1.0
-PortGroup   gnustep 1.0
+PortGroup   gnustep 1.1
 
 name        pdfkit
 version     062906
+revision    1
 platforms   darwin
 maintainers nomaintainer
 homepage    http://www.gnustep.it/enrico/pdfkit/

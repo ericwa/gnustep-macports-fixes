@@ -2,12 +2,12 @@
 # $Id: Portfile 93824 2012-06-01 03:40:42Z rmstonecipher@macports.org $
 
 PortSystem          1.0
-PortGroup           gnustep 1.0
+PortGroup           gnustep 1.1
 
 name                gnustep-base
 replaced_by         gnustep-base-devel
 version             1.19.1
-revision            2
+revision            3
 platforms           darwin
 # libs are LGPL, tools are GPL:
 license             {LGPL-3+ GPL-3+}

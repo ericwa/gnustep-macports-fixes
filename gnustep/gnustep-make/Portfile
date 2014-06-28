@@ -2,11 +2,11 @@
 # $Id: Portfile 108870 2013-08-04 06:18:37Z jeremyhu@macports.org $
 
 PortSystem      1.0
-PortGroup       gnustep 1.0
+PortGroup       gnustep 1.1
 
 name            gnustep-make
 version         2.6.1
-revision        1
+revision        2
 categories      gnustep devel cross
 platforms       darwin
 license         GPL-3+

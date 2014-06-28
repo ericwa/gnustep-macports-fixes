@@ -1,10 +1,10 @@
 # $Id: Portfile 56061 2009-08-24 00:33:19Z ryandesign@macports.org $
 PortSystem  1.0
-PortGroup   gnustep 1.0
+PortGroup   gnustep 1.1
 
 name		ProjectManager
 version		0.2
-revision    1
+revision    2
 platforms	darwin
 maintainers	nomaintainer
 homepage	http://home.gna.org/pmanager

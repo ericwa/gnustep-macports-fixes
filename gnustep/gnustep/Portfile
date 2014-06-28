@@ -1,11 +1,12 @@
 # $Id: Portfile 84733 2011-09-30 11:36:52Z jmr@macports.org $
 
 PortSystem  1.0
-PortGroup   gnustep 1.0
+PortGroup   gnustep 1.1
 
 name        gnustep
 epoch       200707
 version     0.18.1
+revision    1
 platforms   darwin
 license     BSD
 maintainers nomaintainer

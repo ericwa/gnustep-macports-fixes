@@ -2,11 +2,11 @@
 # $Id: Portfile 107641 2013-07-03 17:52:06Z macsforever2000@macports.org $
 
 PortSystem          1.0
-PortGroup           gnustep 1.0
+PortGroup           gnustep 1.1
 
 name                yap-app
 version             0.2
-revision            1
+revision            2
 description         Yap.app PostScript/PDF previewer
 long_description \
     A PostScript/PDF previewer and front end to the a2ps text formatting \

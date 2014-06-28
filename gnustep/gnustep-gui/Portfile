@@ -2,12 +2,12 @@
 # $Id: Portfile 120565 2014-06-01 16:53:49Z cal@macports.org $
 
 PortSystem      1.0
-PortGroup       gnustep 1.0
+PortGroup       gnustep 1.1
 
 name            gnustep-gui
 replaced_by     gnustep-gui-devel
 version         0.17.0
-revision        6
+revision        7
 platforms       darwin
 # libs are LGPL, tools are GPL:
 license         {LGPL GPL-3+}

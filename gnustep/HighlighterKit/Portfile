@@ -2,10 +2,11 @@
 # $Id: Portfile 97215 2012-08-30 15:30:19Z jmr@macports.org $
 
 PortSystem          1.0
-PortGroup           gnustep 1.0
+PortGroup           gnustep 1.1
 
 name                HighlighterKit
 version             0.1
+revision            1
 license             GPL-2+
 maintainers         nomaintainer
 platforms           darwin

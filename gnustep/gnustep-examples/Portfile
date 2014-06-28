@@ -1,8 +1,9 @@
 PortSystem 1.0
-PortGroup  gnustep 1.0
+PortGroup  gnustep 1.1
 
 name			     gnustep-examples
 version            1.3.0
+revision           1
 platforms          darwin
 maintainers		nomaintainer
 description		examples for the GNUstep libraries

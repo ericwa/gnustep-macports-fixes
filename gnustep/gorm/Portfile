@@ -2,7 +2,7 @@
 # $Id: Portfile 96612 2012-08-15 10:07:51Z jmr@macports.org $
 
 PortSystem      1.0
-PortGroup       gnustep 1.0
+PortGroup       gnustep 1.1
 
 fetch.type      svn
 svn.url         svn://svn.gna.org/svn/gnustep/apps/gorm/trunk
@@ -11,6 +11,7 @@ worksrcdir      trunk
 
 name            gorm
 version         1.2.12-${svn.revision}
+revision        1
 platforms       darwin
 license         GPL-2+
 maintainers     nomaintainer

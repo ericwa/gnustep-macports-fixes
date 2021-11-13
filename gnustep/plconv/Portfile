@@ -1,19 +1,31 @@
-PortSystem  1.0
-PortGroup   gnustep 1.0
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 94537 2012-06-22 02:36:43Z jmr@macports.org $
 
-name		plconv	
-version		0.1
-platforms	darwin
-maintainers	nomaintainer
-homepage	http://home.gna.org/pmanager
+PortSystem      1.0
+PortGroup       gnustep 1.1
 
-description	Convert between different property list formats
+name            plconv
+version         0.1
+revision        1
+platforms       darwin
+license         GPL-2+
+maintainers     nomaintainer
+homepage        http://home.gna.org/pmanager
+
+description     Convert between different property list formats
 long_description \
     The plconv tool allows you to freely and transparently \
     convert between different property list formats \
     supported by GNUstep.
 
 master_sites    http://download.gna.org/pmanager/0.2/
-checksums	    md5 aabe97b6471693bdf4d00320497b1301
+checksums       md5     aabe97b6471693bdf4d00320497b1301 \
+                sha1    a271e0ac4493995f460125332034addf024bdec2 \
+                rmd160  ce3b2e6ca8b92a4e930b31e09d838a61204e6fa1
 
+#FIXME: the gnustep-base port in this repo is essentially obsoleted in
+# favor of gnustep-base-devel, will need to convert to path-style
+# dependency:
 depends_lib     port:gnustep-base
+
+#FIXME: livecheck errors out with a 406

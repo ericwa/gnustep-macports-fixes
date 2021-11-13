@@ -1,5 +1,5 @@
 PortSystem  1.0
-PortGroup   gnustep 1.0
+PortGroup   gnustep 1.1
 
 fetch.type      svn
 svn.url         svn://svn.gna.org/svn/gnustep/apps/gworkspace/trunk
@@ -8,6 +8,7 @@ worksrcdir      trunk
 
 name        gworkspace
 version     0.9.0-${svn.revision}
+revision    1
 platforms   darwin
 license     GPL-2+
 maintainers nomaintainer

@@ -1,4 +1,8 @@
+# gitignore for gnustep-macports-fixes
+
 *.swp
 PortIndex
 PortIndex.quick
 *.Portfile.swo
+gnustep/*/work
+*(Autosaved)*

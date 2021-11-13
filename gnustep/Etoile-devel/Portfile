@@ -1,16 +1,18 @@
-# $Id: Portfile 82736 2011-08-19 17:44:11Z pixilla@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 99247 2012-10-30 10:41:29Z g5pw@macports.org $
 
-PortSystem  1.0
-PortGroup   gnustep 1.0
+PortSystem      1.0
+PortGroup       gnustep 1.1
 
 name            Etoile-devel
 version         0.1.9
-revision        5
+revision        7
 platforms       darwin
+license         GPL-2+ LGPL BSD
 maintainers     nomaintainer
 homepage        http://www.etoile-project.org/
 
-description     GNUstep based user environnement
+description     GNUstep based user environment
 long_description \
     Etoile intends to be an innovative GNUstep-based user environment \
     built from the ground up on highly modular and light components \
@@ -26,21 +28,23 @@ svn.url         http://svn.gna.org/svn/etoile/trunk/Etoile
 #}
 ########################################################################
 
-depends_lib         port:SQLClient \
+depends_lib-append  port:SQLClient \
                     path:bin/dbus-daemon:dbus \
                     port:oniguruma5 \
                     port:poppler
 
 worksrcdir          Etoile
 
-patchfiles          patch-etoile.make \
-                    patch-PopplerKit-config.sh \
-                    patch-xmpp-GNUmakefile
+patchfiles          patch-etoile.make.diff \
+                    patch-PopplerKit-config.sh.diff \
+                    patch-xmpp-GNUmakefile.diff
 
-array set gnustep.post_flags {
-    Frameworks/AddressesKit/Frameworks/AddressView  -lAddresses
-    Frameworks/BookmarkKit                          -lCollectionKit
-    Frameworks/SystemConfig                         -lX11
+if {[info exists gnustep.post_flags]} {
+    array set gnustep.post_flags {
+        Frameworks/AddressesKit/Frameworks/AddressView  -lAddresses
+        Frameworks/BookmarkKit                          -lCollectionKit
+        Frameworks/SystemConfig                         -lX11
+    }
 }
 
 post-patch {
@@ -50,7 +54,7 @@ post-patch {
         ${worksrcpath}/Services/Private/System/GNUmakefile
 }
 
-# We don't build corner because StepTalk is not available yet in MP
+# We do NOT build corner because StepTalk is not available yet in MacPorts:
 build.args      corner=no debug=yes
 destroot.args   corner=no debug=yes
 
@@ -65,9 +69,9 @@ post-destroot {
         ${destroot}${prefix}/share/xsessions
 
     set chan [open ${destroot}${prefix}/bin/etoile w]
-	puts $chan ". ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh; etoile_system"
-	close $chan
-	file attributes ${destroot}${prefix}/bin/etoile -permissions 0755
+    puts ${chan} ". ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh; etoile_system"
+    close ${chan}
+    file attributes ${destroot}${prefix}/bin/etoile -permissions 0755
 
     xinstall -d ${destroot}${prefix}/GNUstep/Local/Library/Themes
     copy ${worksrcpath}/Bundles/Camaelon/Nesedah.theme \
@@ -84,3 +88,4 @@ post-destroot {
         ${destroot}${prefix}/GNUstep/Local/Library/Headers/AddressBook
 }
 
+#FIXME: livecheck errors out with a 404

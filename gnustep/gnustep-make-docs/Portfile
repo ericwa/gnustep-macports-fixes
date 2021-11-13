@@ -1,26 +1,31 @@
-# $Id: Portfile 40563 2008-10-06 21:32:55Z jmr@macports.org $
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 112919 2013-11-04 03:51:43Z jmr@macports.org $
 
-PortSystem  1.0
+PortSystem          1.0
 
-name            	gnustep-make-docs
-version         	1.13.0
-revision			1
+name                gnustep-make-docs
+version             1.13.0
+revision            3
 categories          gnustep devel
-description     	GNUstep makefile documentation
-long_description	${description}
-platforms       	darwin
-maintainers     	nomaintainer
-homepage			http://www.gnustep.org/
+license             GPL-2+
+description         GNUstep makefile documentation
+long_description    ${description}
+platforms           darwin
+maintainers         nomaintainer
+homepage            http://www.gnustep.org/
 
 depends_build       port:gnustep-make \
                     bin:latex2html:latex2html \
-		    bin:texi2pdf:texinfo \
+                    bin:texi2pdf:texinfo \
                     bin:texi2html:texi2html \
-                    bin:pdftex:texlive
+                    bin:pdftex:texlive-basic \
+                    bin:gzip:gzip
  
-master_sites		gnustep:core
+master_sites        gnustep:core
  
-checksums			md5 1d7a434e751c58c6390055c14ada302b
+checksums           md5     1d7a434e751c58c6390055c14ada302b \
+                    sha1    91f0494d58233e59254c365b338bca1bd684bea6 \
+                    rmd160  b1d619d7c677463bf1a4adae82a412ad95157dc2
 distname            gnustep-make-${version}
 worksrcdir          ${distname}/Documentation
 
@@ -31,23 +36,36 @@ patch {
         ${worksrcpath}/GNUmakefile
 }
 
-use_configure   no
-build.type      gnu
-build {}
+use_configure       no
+build.type          gnu
+build {
+    ui_debug "no build step because everything is done in destroot"
+}
 
 destroot.args       messages=yes
 destroot.destdir \
     GNUSTEP_INSTALLATION_DIR=${destroot}${prefix}/GNUstep/System
 destroot {
-    system "cd ${worksrcpath} && \
-        . ${prefix}/GNUstep/System/Library/Makefiles/GNUstep.sh \
-        && \
-        ${destroot.cmd} ${destroot.target} \
+    set gnustep_syslibdir ${prefix}/GNUstep/System/Library
+    set gnustep_destsysdocdir ${destroot}${gnustep_syslibdir}/Documentation
+    set gs_destsysmandir ${gnustep_destsysdocdir}/man
+    set gs_destsysuserdocdir ${gnustep_destsysdocdir}/User/GNUstep
+    set gs_destsysdevdocdir ${gnustep_destsysdocdir}/Developer/Make/Manual
+    system -W ${worksrcpath} ". ${gnustep_syslibdir}/Makefiles/GNUstep.sh \
+        && ${destroot.cmd} ${destroot.target} \
             ${destroot.args} ${destroot.destdir}"
     foreach i { faq filesystem gnustep-howto machines userfaq } {
-    	file copy ${worksrcpath}/$i \
-    		${destroot}${prefix}/GNUstep/System/Library/Documentation/User/GNUstep
+        ui_debug "copying ${worksrcpath}/${i} to ${gs_destsysuserdocdir}"
+        file copy ${worksrcpath}/${i} ${gs_destsysuserdocdir}
     }
-    file copy ${worksrcpath}/make \
-    		${destroot}${prefix}/GNUstep/System/Library/Documentation/Developer/Make/Manual
+    ui_debug "copying ${worksrcpath}/make to ${gs_destsysdevdocdir}"
+    file copy ${worksrcpath}/make ${gs_destsysdevdocdir}
+    # prevent conflict with gnustep-make:
+    ui_debug "renaming manpages"
+    file rename ${gs_destsysmandir}/man1/openapp.1.gz ${gs_destsysmandir}/man1/openapp-gsmakedocs.1.gz
+    file rename ${gs_destsysmandir}/man7/GNUstep.7.gz ${gs_destsysmandir}/man7/GNUstep-gsmakedocs.7.gz
 }
+
+destroot.violate_mtree yes
+
+#FIXME: livecheck errors out with a 404

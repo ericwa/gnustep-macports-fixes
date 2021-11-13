@@ -1,19 +1,26 @@
-PortSystem  1.0
-PortGroup   gnustep 1.0
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id: Portfile 96612 2012-08-15 10:07:51Z jmr@macports.org $
+
+PortSystem      1.0
+PortGroup       gnustep 1.1
 
 fetch.type      svn
 svn.url         svn://svn.gna.org/svn/gnustep/apps/gorm/trunk
 svn.revision    34196
 worksrcdir      trunk
 
-name        gorm
-version     1.2.12-${svn.revision}
-platforms   darwin
-maintainers nomaintainer
+name            gorm
+version         1.2.12-${svn.revision}
+revision        1
+platforms       darwin
+license         GPL-2+
+maintainers     nomaintainer
 
-description  Graphical Object Relationship Modeller
+description      Graphical Object Relationship Modeller
 long_description \
     Gorm stands for "Graphical Object Relationship Modeller" \
     and is GNUstep's easy-to-use interface designer.
 
 depends_lib     port:gnustep-core
+
+#FIXME: livecheck errors out with a 404

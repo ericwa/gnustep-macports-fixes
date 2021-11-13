@@ -1,10 +1,11 @@
 # this is basically a dummy port which pulls in gnustep-make, base, back and gui as dependencies
 
 PortSystem  1.0
-PortGroup   gnustep 1.0
+PortGroup   gnustep 1.1
 
 name        gnustep-core
 version     0.18.1
+revision    1
 categories  gnustep devel cross
 platforms   darwin
 license     {LGPL GPL-3+}

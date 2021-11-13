@@ -1,11 +1,13 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
 # $Id: Portfile 84733 2011-09-30 11:36:52Z jmr@macports.org $
 
 PortSystem  1.0
-PortGroup   gnustep 1.0
+PortGroup   gnustep 1.1
 
 name        gnustep
 epoch       200707
 version     0.18.1
+revision    1
 platforms   darwin
 license     BSD
 maintainers nomaintainer
@@ -15,11 +17,21 @@ long_description \
     This is the GNUstep Desktop and Applications suite. \
     Also provides a user-friendly environment configuration script.
 
-distfiles
+# clear, there is nothing to download:
+distfiles ""
+
+# this is the default for the gnustep PortGroup, but just in case:
 use_configure no
-build       { }
-destroot    { }
-post-install { }
+
+build {
+    ui_debug "${name} has no build step"
+}
+destroot {
+    ui_debug "${name} has no destroot step"
+}
+post-install {
+    ui_debug "${name} has no post-install step"
+}
 
 depends_lib-append \
     port:GMastermind \
@@ -31,8 +43,11 @@ depends_lib-append \
     port:gworkspace \
     port:windowmaker
 
-variant dev_tools {
+variant dev_tools description {Add development-tools} {
     depends_lib-append \
         port:ProjectManager \
         port:Renaissance
 }
+
+# livecheck makes no sense here:
+livecheck.type none
